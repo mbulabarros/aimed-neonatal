@@ -64,6 +64,14 @@ section{padding:clamp(88px,11vw,150px) 0;position:relative}
 .topo nav a{text-decoration:none;opacity:.72;transition:opacity .2s}
 .topo nav a:hover,.topo nav a.atual{opacity:1}
 .progresso{position:absolute;left:0;bottom:0;height:2px;width:0;background:linear-gradient(90deg,var(--monitor),var(--foto))}
+.topo .wrap>.idioma{margin-left:auto}
+.idioma{display:inline-flex;border:1px solid rgba(207,174,92,.5);border-radius:999px;padding:3px;gap:2px;margin-left:18px}
+.idioma button{all:unset;cursor:pointer;font:600 12.5px var(--sans);letter-spacing:.04em;padding:6px 11px;border-radius:999px;color:#C9D4E3}
+.idioma button[aria-pressed="true"]{background:var(--monitor);color:#081429}
+@media (max-width:360px){.marca-txt{display:none}}
+@media (max-width:420px){.menu-btn span{display:none}.menu-btn{padding:9px 11px}.idioma{margin-right:8px}}
+.idioma button:focus-visible{outline:2px solid var(--monitor);outline-offset:2px}
+@media (max-width:900px){.idioma{margin-left:auto;margin-right:10px}}
 .topo nav .so-movel{display:none}
 .topo nav.aberto .so-movel{display:flex}
 .menu-btn{display:none;align-items:center;gap:10px;background:transparent;border:1px solid rgba(207,174,92,.5);color:#E8EFF6;font:600 14px var(--sans);padding:9px 14px;border-radius:10px;cursor:pointer}
@@ -160,6 +168,13 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 .reset:hover{border-color:var(--monitor);color:#fff}
 .reset svg{width:16px;height:16px}
 .cena3d{display:block;width:100%;border-radius:20px;touch-action:pan-y}
+.palco{position:relative}
+.gesto{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;padding:9px 16px 9px 12px;border-radius:999px;background:rgba(8,20,41,.78);border:1px solid rgba(207,174,92,.55);color:#F1F4F9;font:500 13.5px var(--sans);pointer-events:none;white-space:nowrap;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:opacity .6s}
+.gesto svg{width:26px;height:26px;color:var(--monitor);animation:vaivem 2.2s ease-in-out infinite}
+@keyframes vaivem{0%,100%{transform:translateX(-5px) rotate(-8deg)}50%{transform:translateX(5px) rotate(8deg)}}
+.gesto.some{opacity:0}
+.hero .gesto{left:auto;right:24px;bottom:auto;top:96px;transform:none;z-index:3}
+@media (max-width:760px){.hero .gesto{right:16px;top:80px}}
 @media (max-width:600px){#skyline{height:300px}#aula3d{height:240px}.subir{bottom:20px!important;right:16px!important;width:44px;height:44px}}
 #skyline{height:clamp(240px,30vw,360px);margin-top:56px;background:radial-gradient(80% 90% at 50% 40%,#15305A,#0B1A33);border:1px solid var(--linha)}
 #aula3d{height:clamp(200px,24vw,300px);background:radial-gradient(80% 90% at 50% 40%,#15305A,#0B1A33);border:1px solid var(--linha)}
@@ -301,222 +316,224 @@ details.aula[open] .mais{transform:rotate(45deg);background:#12284D}
 
 <header class="topo" id="topo">
   <div class="wrap">
-    <a class="marca" href="#inicio"><i aria-hidden="true"></i>INOVAMED</a>
+    <a class="marca" href="#inicio" aria-label="INOVAMED"><i aria-hidden="true"></i><span class="marca-txt">INOVAMED</span></a>
     <nav aria-label="Índice da proposta" id="indice">
-      <a href="#jornada">Programa</a>
-      <a href="#imersao">Imersão</a>
-      <a href="#experimente">Experimente</a>
-      <a href="#contrario" class="so-movel">Teoria do Contrário</a>
-      <a href="#serie">Série nacional</a>
-      <a href="#investimento">Investimento</a>
-      <a href="#instrutor">Instrutor</a>
-      <a href="#proximos" class="so-movel">Próximos passos</a>
+      <a href="#jornada"><span class="t" data-en="Program">Programa</span></a>
+      <a href="#imersao"><span class="t" data-en="Immersion">Imersão</span></a>
+      <a href="#experimente"><span class="t" data-en="Try it">Experimente</span></a>
+      <a href="#contrario" class="so-movel"><span class="t" data-en="Contrarian Theory">Teoria do Contrário</span></a>
+      <a href="#serie"><span class="t" data-en="National series">Série nacional</span></a>
+      <a href="#investimento"><span class="t" data-en="Investment">Investimento</span></a>
+      <a href="#instrutor"><span class="t" data-en="Instructor">Instrutor</span></a>
+      <a href="#proximos" class="so-movel"><span class="t" data-en="Next steps">Próximos passos</span></a>
     </nav>
-    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="indice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span>Índice</span></button>
+    <div class="idioma" role="group" aria-label="Idioma / Language"><button type="button" data-l="pt" aria-pressed="true">PT</button><button type="button" data-l="en" aria-pressed="false">EN</button></div>
+    <button class="menu-btn" id="menu-btn" type="button" aria-label="Índice" aria-expanded="false" aria-controls="indice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span>Índice</span></button>
   </div>
   <div class="progresso" id="progresso"></div>
 </header>
 
 <section class="hero" id="inicio">
   <canvas id="cena" aria-hidden="true"></canvas>
+  <div class="gesto" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 17V8.5a1.8 1.8 0 0 1 3.6 0V15"/><path d="M16.6 14v-1.6a1.8 1.8 0 0 1 3.6 0V15"/><path d="M20.2 14.2a1.8 1.8 0 0 1 3.6 0v4.6c0 4.2-2.8 7.2-7 7.2h-1.2c-2.4 0-3.9-.9-5.2-2.6l-3-4a1.9 1.9 0 0 1 2.9-2.4L13 19"/><path d="M4 7h5M4 7l2-2M4 7l2 2"/><path d="M28 7h-5M28 7l-2-2M28 7l-2 2"/></svg><span class="gesto-txt">Arraste para girar</span></div>
   <div class="wrap">
-    <div class="selo entrada"><span class="pt"></span>Proposta para a Nestlé</div>
+    <div class="selo entrada"><span class="pt"></span><span class="t" data-en="Proposal for Nestlé">Proposta para a Nestlé</span></div>
     <h1 class="entrada e2">AIMED<span class="linha2">Neonatal</span></h1>
     <div class="hero-rodape entrada e3">
-      <p>Inteligência artificial construída pelo próprio neonatologista. Uma imersão presencial, o acompanhamento da turma e uma série nacional de cinco aulas.</p>
-      <div class="hero-meta"><span>Preparada por</span><b>INOVAMED</b><span>Data</span><b>Outubro de 2026</b><span>Válida até</span><b>20 de novembro de 2026</b></div>
+      <p><span class="t" data-en="Artificial intelligence built by neonatologists themselves. An in-person immersion, follow-up with the cohort and a national series of five live classes.">Inteligência artificial construída pelo próprio neonatologista. Uma imersão presencial, o acompanhamento da turma e uma série nacional de cinco aulas.</span></p>
+      <div class="hero-meta"><span><span class="t" data-en="Prepared by">Preparada por</span></span><b>INOVAMED</b><span><span class="t" data-en="Date">Data</span></span><b><span class="t" data-en="October 2026">Outubro de 2026</span></b><span><span class="t" data-en="Valid until">Válida até</span></span><b><span class="t" data-en="November 20, 2026">20 de novembro de 2026</span></b></div>
     </div>
   </div>
 </section>
 
 <section class="manifesto">
   <div class="wrap">
-    <p>Na imersão, cada neonatologista sai com ferramentas que ele mesmo construiu, <span>já funcionando na própria UTIN.</span></p>
+    <p><span class="t" data-en="In the immersion, every neonatologist leaves with tools they built themselves, &lt;span&gt;already running in their own NICU.&lt;/span&gt;">Na imersão, cada neonatologista sai com ferramentas que ele mesmo construiu, <span>já funcionando na própria UTIN.</span></span></p>
   </div>
 </section>
 
 <section class="jornada-sec" id="jornada">
   <div class="wrap">
-    <div class="cap"><b>I</b>O programa<span></span></div>
-    <h2>Uma jornada em <em>quatro momentos</em></h2>
-    <p class="lead">A mesma metodologia (AIMED) e o mesmo repertório de casos neonatais atravessam as três frentes. Se a série acontecer antes da imersão, a turma presencial chega conhecendo os debates.</p>
+    <div class="cap"><b>I</b><span class="t" data-en="The program">O programa</span><span></span></div>
+    <h2><span class="t" data-en="A journey in &lt;em&gt;four stages&lt;/em&gt;">Uma jornada em <em>quatro momentos</em></span></h2>
+    <p class="lead"><span class="t" data-en="The same methodology (AIMED) and the same set of neonatal cases run through all three fronts. If the series takes place before the immersion, the in-person cohort arrives already familiar with the debates.">A mesma metodologia (AIMED) e o mesmo repertório de casos neonatais atravessam as três frentes. Se a série acontecer antes da imersão, a turma presencial chega conhecendo os debates.</span></p>
     <div class="jornada">
-      <div class="etapa"><div class="num">1</div><div class="quando">Brasil inteiro</div><h3>Série nacional</h3><p>Cinco aulas ao vivo de 60 minutos, assistidas em grupo em várias cidades. Todas gravadas.</p></div>
-      <div class="etapa"><div class="num">2</div><div class="quando">De 7 a 3 dias antes</div><h3>Preparação</h3><p>Sessão online de 45 minutos: contas criadas, ambiente testado e o problema de cada um definido.</p></div>
-      <div class="etapa foco"><div class="num">3</div><div class="quando">1,5 dia presencial</div><h3>Imersão</h3><p>Até 15 neonatologistas, cada um no próprio notebook, com mentoria em trios.</p></div>
-      <div class="etapa"><div class="num">4</div><div class="quando">60 dias depois</div><h3>Demo Day</h3><p>Cada participante mostra a ferramenta funcionando na própria unidade, como apoio e com conferência do médico.</p></div>
+      <div class="etapa"><div class="num">1</div><div class="quando"><span class="t" data-en="Nationwide">Brasil inteiro</span></div><h3><span class="t" data-en="National series">Série nacional</span></h3><p><span class="t" data-en="Five live 60-minute classes, watched in groups across several cities. All recorded.">Cinco aulas ao vivo de 60 minutos, assistidas em grupo em várias cidades. Todas gravadas.</span></p></div>
+      <div class="etapa"><div class="num">2</div><div class="quando"><span class="t" data-en="7 to 3 days before">De 7 a 3 dias antes</span></div><h3><span class="t" data-en="Preparation">Preparação</span></h3><p><span class="t" data-en="A 45-minute online session: accounts created, setup tested and each participant&#x27;s problem defined.">Sessão online de 45 minutos: contas criadas, ambiente testado e o problema de cada um definido.</span></p></div>
+      <div class="etapa foco"><div class="num">3</div><div class="quando"><span class="t" data-en="1.5 days in person">1,5 dia presencial</span></div><h3><span class="t" data-en="Immersion">Imersão</span></h3><p><span class="t" data-en="Up to 15 neonatologists, each on their own laptop, mentored in groups of three.">Até 15 neonatologistas, cada um no próprio notebook, com mentoria em trios.</span></p></div>
+      <div class="etapa"><div class="num">4</div><div class="quando"><span class="t" data-en="60 days later">60 dias depois</span></div><h3>Demo Day</h3><p><span class="t" data-en="Each participant shows their tool running in their own unit, as decision support and always checked by the physician.">Cada participante mostra a ferramenta funcionando na própria unidade, como apoio e com conferência do médico.</span></p></div>
     </div>
   </div>
 </section>
 
 <section class="grade" id="imersao">
   <div class="wrap">
-    <div class="cap"><b>II</b>A imersão<span></span></div>
+    <div class="cap"><b>II</b><span class="t" data-en="The immersion">A imersão</span><span></span></div>
     <div class="cabeca">
-      <h2>Um dia e meio, <em>hora a hora</em></h2>
-      <div class="numeros"><div><b>12h30</b>presenciais</div><div><b>13h</b>no certificado</div><div><b>15</b>participantes</div></div>
+      <h2><span class="t" data-en="A day and a half, &lt;em&gt;hour by hour&lt;/em&gt;">Um dia e meio, <em>hora a hora</em></span></h2>
+      <div class="numeros"><div><b><span class="t" data-en="12.5 h">12h30</span></b><span class="t" data-en="in person">presenciais</span></div><div><b><span class="t" data-en="13 h">13h</span></b><span class="t" data-en="on the certificate">no certificado</span></div><div><b>15</b><span class="t" data-en="participants">participantes</span></div></div>
     </div>
-    <canvas id="skyline" class="cena3d" aria-label="Distribuição do tempo da imersão em 3D por tipo de atividade" role="img"></canvas>
+    <div class="palco"><canvas id="skyline" class="cena3d" aria-label="Distribuição do tempo da imersão em 3D por tipo de atividade" role="img"></canvas><div class="gesto" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 17V8.5a1.8 1.8 0 0 1 3.6 0V15"/><path d="M16.6 14v-1.6a1.8 1.8 0 0 1 3.6 0V15"/><path d="M20.2 14.2a1.8 1.8 0 0 1 3.6 0v4.6c0 4.2-2.8 7.2-7 7.2h-1.2c-2.4 0-3.9-.9-5.2-2.6l-3-4a1.9 1.9 0 0 1 2.9-2.4L13 19"/><path d="M4 7h5M4 7l2-2M4 7l2 2"/><path d="M28 7h-5M28 7l-2-2M28 7l-2 2"/></svg><span class="gesto-txt">Arraste para girar</span></div></div>
     <div class="tipos">
-      <span><i style="background:#CFAE5C"></i>Construção <b>5h15</b></span>
-      <span><i style="background:#5B7CFA"></i>Método e ferramentas <b>4h10</b></span>
-      <span><i style="background:#D9814A"></i>Pensamento crítico <b>1h35</b></span>
-      <span><i style="background:#A57CF0"></i>Ética <b>45 min</b></span>
-      <span><i style="background:#C9D3D8"></i>Cafés</span>
+      <span><i style="background:#CFAE5C"></i><span class="t" data-en="Building ">Construção </span><b><span class="t" data-en="5:15 h">5h15</span></b></span>
+      <span><i style="background:#5B7CFA"></i><span class="t" data-en="Method and tools ">Método e ferramentas </span><b><span class="t" data-en="4:10 h">4h10</span></b></span>
+      <span><i style="background:#D9814A"></i><span class="t" data-en="Critical thinking ">Pensamento crítico </span><b><span class="t" data-en="1:35 h">1h35</span></b></span>
+      <span><i style="background:#A57CF0"></i><span class="t" data-en="Ethics ">Ética </span><b>45 min</b></span>
+      <span><i style="background:#C9D3D8"></i><span class="t" data-en="Coffee breaks">Cafés</span></span>
     </div>
-    <p class="dica3d">Cada bloco é um módulo, com largura proporcional à duração. A fileira da frente é o dia 1; a de trás, o dia 2. Arraste para os lados para girar.</p>
+    <p class="dica3d"><span class="t" data-en="Each block is a module, its width proportional to its length. The front row is day 1; the back row, day 2.">Cada bloco é um módulo, com largura proporcional à duração. A fileira da frente é o dia 1; a de trás, o dia 2.</span></p>
     <div class="dias">
       <div class="dia">
-        <h3>Dia 1 <span>8h00 às 17h30</span></h3>
-        <div class="item"><div class="h">8h00</div><div><h4>Abertura</h4><p>Apresentação dos participantes e do problema que cada um trouxe para resolver.</p></div></div>
-        <div class="item"><div class="h">8h20</div><div><h4>Metodologia AIMED</h4><p>Os cinco componentes do pedido clínico (Assistente, Informação, Missão, Estrutura, Diretrizes), com um caso de prematuro de 28 semanas em três níveis de profundidade.</p></div></div>
-        <div class="item"><div class="h">9h20</div><div><h4>Perfil Clínico Permanente</h4><p>Cada participante configura a IA uma única vez como neonatologista do seu tipo de unidade.</p></div></div>
-        <div class="item"><div class="h">9h40</div><div><h4>Teoria do Contrário: plantando</h4><p>Cada trio recebe uma controvérsia e escreve o prompt que manda a IA defender o lado oposto. A discussão só volta no dia seguinte.</p></div></div>
-        <div class="item pausa"><div class="h">10h00</div><div><h4>Café</h4></div></div>
-        <div class="item"><div class="h">10h15</div><div><h4>A voz como ferramenta clínica</h4><p>Evolução ditada no round e passagem de plantão estruturada a partir da fala.</p></div></div>
-        <div class="item"><div class="h">11h00</div><div><h4>MAPA: qual solução escolher</h4><p>Quando basta um pedido, quando vale uma Skill, um projeto ou um agente.</p></div></div>
-        <div class="item pausa"><div class="h">12h00</div><div><h4>Almoço livre</h4></div></div>
-        <div class="item ouro"><div class="h">13h30</div><div><h4>Laboratório de cálculos neonatais</h4><p>Cálculos da UTIN transformados em Skills reutilizáveis, e uma ferramenta completa construída ao vivo: o limiar de fototerapia pelo nomograma AAP 2022.</p></div></div>
-        <div class="item pausa"><div class="h">15h30</div><div><h4>Café</h4></div></div>
-        <div class="item"><div class="h">15h45</div><div><h4>Artefatos 3D</h4><p>O trajeto do cateter umbilical em três dimensões, acoplado ao cálculo da profundidade de inserção.</p></div></div>
-        <div class="item"><div class="h">16h30</div><div><h4>Mentoria em trios, 1ª rodada</h4><p>Cada participante começa a ferramenta do próprio caso.</p></div></div>
+        <h3><span class="t" data-en="Day 1 ">Dia 1 </span><span><span class="t" data-en="8:00 am to 5:30 pm">8h00 às 17h30</span></span></h3>
+        <div class="item"><div class="h"><span class="t" data-en="8:00">8h00</span></div><div><h4><span class="t" data-en="Opening">Abertura</span></h4><p><span class="t" data-en="Participants introduce themselves and the problem each one brought to solve.">Apresentação dos participantes e do problema que cada um trouxe para resolver.</span></p></div></div>
+        <div class="item"><div class="h"><span class="t" data-en="8:20">8h20</span></div><div><h4><span class="t" data-en="AIMED methodology">Metodologia AIMED</span></h4><p><span class="t" data-en="The five components of a clinical request (Assistant, Information, Mission, Structure, Directives), worked through a 28-week preterm case at three levels of depth.">Os cinco componentes do pedido clínico (Assistente, Informação, Missão, Estrutura, Diretrizes), com um caso de prematuro de 28 semanas em três níveis de profundidade.</span></p></div></div>
+        <div class="item"><div class="h"><span class="t" data-en="9:20">9h20</span></div><div><h4><span class="t" data-en="Permanent Clinical Profile">Perfil Clínico Permanente</span></h4><p><span class="t" data-en="Each participant sets up the AI once as a neonatologist for their type of unit.">Cada participante configura a IA uma única vez como neonatologista do seu tipo de unidade.</span></p></div></div>
+        <div class="item"><div class="h"><span class="t" data-en="9:40">9h40</span></div><div><h4><span class="t" data-en="Contrarian Theory: planting">Teoria do Contrário: plantando</span></h4><p><span class="t" data-en="Each trio receives a controversy and writes the prompt that makes the AI argue the opposite side. The discussion only resumes the next day.">Cada trio recebe uma controvérsia e escreve o prompt que manda a IA defender o lado oposto. A discussão só volta no dia seguinte.</span></p></div></div>
+        <div class="item pausa"><div class="h"><span class="t" data-en="10:00">10h00</span></div><div><h4><span class="t" data-en="Coffee break">Café</span></h4></div></div>
+        <div class="item"><div class="h"><span class="t" data-en="10:15">10h15</span></div><div><h4><span class="t" data-en="Voice as a clinical tool">A voz como ferramenta clínica</span></h4><p><span class="t" data-en="Progress notes dictated during rounds and structured shift handoffs built from speech.">Evolução ditada no round e passagem de plantão estruturada a partir da fala.</span></p></div></div>
+        <div class="item"><div class="h"><span class="t" data-en="11:00">11h00</span></div><div><h4><span class="t" data-en="MAPA: choosing the right solution">MAPA: qual solução escolher</span></h4><p><span class="t" data-en="When a single request is enough, and when a Skill, a project or an agent is worth it.">Quando basta um pedido, quando vale uma Skill, um projeto ou um agente.</span></p></div></div>
+        <div class="item pausa"><div class="h"><span class="t" data-en="12:00">12h00</span></div><div><h4><span class="t" data-en="Lunch break">Almoço livre</span></h4></div></div>
+        <div class="item ouro"><div class="h"><span class="t" data-en="13:30">13h30</span></div><div><h4><span class="t" data-en="Neonatal calculations lab">Laboratório de cálculos neonatais</span></h4><p><span class="t" data-en="NICU calculations turned into reusable Skills, plus a complete tool built live: the phototherapy threshold from the AAP 2022 nomogram.">Cálculos da UTIN transformados em Skills reutilizáveis, e uma ferramenta completa construída ao vivo: o limiar de fototerapia pelo nomograma AAP 2022.</span></p></div></div>
+        <div class="item pausa"><div class="h"><span class="t" data-en="15:30">15h30</span></div><div><h4><span class="t" data-en="Coffee break">Café</span></h4></div></div>
+        <div class="item"><div class="h"><span class="t" data-en="15:45">15h45</span></div><div><h4><span class="t" data-en="3D artifacts">Artefatos 3D</span></h4><p><span class="t" data-en="The umbilical catheter path in three dimensions, linked to the insertion depth calculation.">O trajeto do cateter umbilical em três dimensões, acoplado ao cálculo da profundidade de inserção.</span></p></div></div>
+        <div class="item"><div class="h"><span class="t" data-en="16:30">16h30</span></div><div><h4><span class="t" data-en="Mentoring in trios, round 1">Mentoria em trios, 1ª rodada</span></h4><p><span class="t" data-en="Each participant starts the tool for their own case.">Cada participante começa a ferramenta do próprio caso.</span></p></div></div>
       </div>
       <div class="dia">
-        <h3>Dia 2 <span>8h00 às 12h30</span></h3>
-        <div class="item"><div class="h">8h00</div><div><h4>Da dúvida à evidência</h4><p>A dúvida da controvérsia vira pergunta pesquisável (PICO) e busca real. Os ensaios vão para o Gemini Notebook, que responde citando o trecho de cada fonte.</p></div></div>
-        <div class="item"><div class="h">8h45</div><div><h4>Do prompt ao agente</h4><p>Cowork, ChatGPT Work e Gemini Spark: o que faz uma ferramenta agir sozinha e quando isso é seguro. Caso real: um sistema de gestão de leitos neonatais em funcionamento.</p></div></div>
-        <div class="item"><div class="h">9h30</div><div><h4>Ética médica e IA</h4><p>Resolução CFM nº 2.454/2026: registro em prontuário, informação aos pais, responsabilidade, LGPD. Com um exercício em duplas de comunicação com os pais à beira da incubadora.</p></div></div>
-        <div class="item pausa"><div class="h">10h15</div><div><h4>Café</h4></div></div>
-        <div class="item"><div class="h">10h30</div><div><h4>Mentoria em trios, 2ª rodada</h4><p>Finalização e teste de cada ferramenta.</p></div></div>
-        <div class="item"><div class="h">11h30</div><div><h4>Teoria do Contrário: colhendo</h4><p>Cada trio apresenta o veredicto sobre a sua controvérsia.</p></div></div>
-        <div class="item ouro"><div class="h">12h00</div><div><h4>Apresentações e encerramento</h4><p>Cada participante mostra a própria ferramenta funcionando, em até 2 minutos, e sai com o plano dos próximos 7 dias.</p></div></div>
+        <h3><span class="t" data-en="Day 2 ">Dia 2 </span><span><span class="t" data-en="8:00 am to 12:30 pm">8h00 às 12h30</span></span></h3>
+        <div class="item"><div class="h"><span class="t" data-en="8:00">8h00</span></div><div><h4><span class="t" data-en="From question to evidence">Da dúvida à evidência</span></h4><p><span class="t" data-en="The controversy becomes a searchable question (PICO) and a real literature search. The trials go into Gemini Notebook, which answers quoting the passage from each source.">A dúvida da controvérsia vira pergunta pesquisável (PICO) e busca real. Os ensaios vão para o Gemini Notebook, que responde citando o trecho de cada fonte.</span></p></div></div>
+        <div class="item"><div class="h"><span class="t" data-en="8:45">8h45</span></div><div><h4><span class="t" data-en="From prompt to agent">Do prompt ao agente</span></h4><p><span class="t" data-en="Cowork, ChatGPT Work and Gemini Spark: what makes a tool act on its own, and when that is safe. Real case: a neonatal bed management system in production.">Cowork, ChatGPT Work e Gemini Spark: o que faz uma ferramenta agir sozinha e quando isso é seguro. Caso real: um sistema de gestão de leitos neonatais em funcionamento.</span></p></div></div>
+        <div class="item"><div class="h"><span class="t" data-en="9:30">9h30</span></div><div><h4><span class="t" data-en="Medical ethics and AI">Ética médica e IA</span></h4><p><span class="t" data-en="Brazilian Federal Council of Medicine Resolution 2,454/2026: documentation in the medical record, informing parents, accountability, data protection (LGPD). Includes a paired exercise on talking with parents at the incubator.">Resolução CFM nº 2.454/2026: registro em prontuário, informação aos pais, responsabilidade, LGPD. Com um exercício em duplas de comunicação com os pais à beira da incubadora.</span></p></div></div>
+        <div class="item pausa"><div class="h"><span class="t" data-en="10:15">10h15</span></div><div><h4><span class="t" data-en="Coffee break">Café</span></h4></div></div>
+        <div class="item"><div class="h"><span class="t" data-en="10:30">10h30</span></div><div><h4><span class="t" data-en="Mentoring in trios, round 2">Mentoria em trios, 2ª rodada</span></h4><p><span class="t" data-en="Finishing and testing each tool.">Finalização e teste de cada ferramenta.</span></p></div></div>
+        <div class="item"><div class="h"><span class="t" data-en="11:30">11h30</span></div><div><h4><span class="t" data-en="Contrarian Theory: harvesting">Teoria do Contrário: colhendo</span></h4><p><span class="t" data-en="Each trio presents its verdict on its controversy.">Cada trio apresenta o veredicto sobre a sua controvérsia.</span></p></div></div>
+        <div class="item ouro"><div class="h"><span class="t" data-en="12:00">12h00</span></div><div><h4><span class="t" data-en="Presentations and closing">Apresentações e encerramento</span></h4><p><span class="t" data-en="Each participant demos their own working tool in up to 2 minutes and leaves with a plan for the next 7 days.">Cada participante mostra a própria ferramenta funcionando, em até 2 minutos, e sai com o plano dos próximos 7 dias.</span></p></div></div>
       </div>
     </div>
     <div class="rodape-grade">
-      <p class="citacao">O formato vem da turma de Goiânia, em setembro de 2026. O que funcionou melhor foi cada participante chegar com a própria dor para resolver: o balanço hídrico refeito a cada plantão, o escore z de um ecocardiograma, o laudo que se repete toda semana.</p>
-      <p>Ferramentas usadas: ChatGPT, Claude, Gemini e Gemini Notebook (antigo NotebookLM). Quando existe versão gratuita, ela aparece primeiro.<br><br>As ferramentas de IA mudam rápido. O programa pode ser atualizado até a data do evento, sem alterar carga horária nem objetivos.</p>
+      <p class="citacao"><span class="t" data-en="The format comes from the Goiânia cohort, in September 2026. What worked best was each participant arriving with their own pain point to solve: the fluid balance redone every shift, the z-score of an echocardiogram, the report written the same way every week.">O formato vem da turma de Goiânia, em setembro de 2026. O que funcionou melhor foi cada participante chegar com a própria dor para resolver: o balanço hídrico refeito a cada plantão, o escore z de um ecocardiograma, o laudo que se repete toda semana.</span></p>
+      <p><span class="t" data-en="Tools used: ChatGPT, Claude, Gemini and Gemini Notebook (formerly NotebookLM). Whenever a free version exists, it is shown first.&lt;br&gt;&lt;br&gt;AI tools change fast. The program may be updated up to the event date, without changing hours or objectives.">Ferramentas usadas: ChatGPT, Claude, Gemini e Gemini Notebook (antigo NotebookLM). Quando existe versão gratuita, ela aparece primeiro.<br><br>As ferramentas de IA mudam rápido. O programa pode ser atualizado até a data do evento, sem alterar carga horária nem objetivos.</span></p>
     </div>
   </div>
 </section>
 
 <section class="escuro" id="experimente">
   <div class="wrap">
-    <div class="cap"><b>III</b>Experimente<span></span></div>
-    <h2>O tipo de ferramenta <em>que sai do curso</em></h2>
-    <p class="lead">Esta calculadora de taxa de infusão de glicose foi construída com o método ensinado no laboratório. Mexa nos valores: o resultado vem sempre com a conta, para o médico conferir antes de usar.</p>
+    <div class="cap"><b>III</b><span class="t" data-en="Try it">Experimente</span><span></span></div>
+    <h2><span class="t" data-en="The kind of tool &lt;em&gt;participants leave with&lt;/em&gt;">O tipo de ferramenta <em>que sai do curso</em></span></h2>
+    <p class="lead"><span class="t" data-en="This glucose infusion rate calculator was built with the method taught in the lab. Change the values: the result always comes with the math, so the physician can check it before using it.">Esta calculadora de taxa de infusão de glicose foi construída com o método ensinado no laboratório. Mexa nos valores: o resultado vem sempre com a conta, para o médico conferir antes de usar.</span></p>
     <div class="calc">
       <div class="painel">
-        <div class="campo"><label for="peso">Peso <output id="o-peso"></output></label><input id="peso" type="range" min="0.4" max="4.5" step="0.01" value="1.2"></div>
-        <div class="campo"><label for="vol">Volume de soro <output id="o-vol"></output></label><input id="vol" type="range" min="40" max="180" step="5" value="100"></div>
-        <div class="campo"><label for="glic">Concentração de glicose <output id="o-glic"></output></label><input id="glic" type="range" min="5" max="25" step="0.5" value="10"></div>
-        <button class="reset" id="reset" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Voltar aos valores iniciais</button>
+        <div class="campo"><label for="peso"><span class="t" data-en="Weight ">Peso </span><output id="o-peso"></output></label><input id="peso" type="range" min="0.4" max="4.5" step="0.01" value="1.2"></div>
+        <div class="campo"><label for="vol"><span class="t" data-en="Fluid volume ">Volume de soro </span><output id="o-vol"></output></label><input id="vol" type="range" min="40" max="180" step="5" value="100"></div>
+        <div class="campo"><label for="glic"><span class="t" data-en="Dextrose concentration ">Concentração de glicose </span><output id="o-glic"></output></label><input id="glic" type="range" min="5" max="25" step="0.5" value="10"></div>
+        <button class="reset" id="reset" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg><span class="t" data-en="Reset to initial values">Voltar aos valores iniciais</span></button>
       </div>
       <div class="lado-dir">
         <div class="visor" aria-live="polite">
-          <div class="rot"><span>Taxa de infusão de glicose</span><i>calculando</i></div>
+          <div class="rot"><span><span class="t" data-en="Glucose infusion rate">Taxa de infusão de glicose</span></span><i><span class="t" data-en="calculating">calculando</span></i></div>
           <div class="valor" id="v-tig">6,9</div>
           <div class="unid">mg/kg/min</div>
           <canvas id="traco" aria-hidden="true"></canvas>
         </div>
-        <div class="conta"><h3>A conta, passo a passo</h3><ol id="passos"></ol></div>
+        <div class="conta"><h3><span class="t" data-en="The math, step by step">A conta, passo a passo</span></h3><ol id="passos"></ol></div>
       </div>
     </div>
-    <p class="aviso">Demonstração educacional. Não substitui a prescrição nem a conferência pelo médico responsável.</p>
+    <p class="aviso"><span class="t" data-en="Educational demonstration. It does not replace the prescription or the check by the responsible physician.">Demonstração educacional. Não substitui a prescrição nem a conferência pelo médico responsável.</span></p>
   </div>
 </section>
 
 <section class="contrario" id="contrario">
   <div class="wrap">
-    <div class="cap"><b>IV</b>Teoria do Contrário<span></span></div>
-    <h2>A IA usada para <em>contestar o médico</em></h2>
-    <p class="lead">Cada trio defende uma posição e pede à IA que argumente, com evidência, o lado oposto. Toque numa controvérsia para ver os dois lados.</p>
+    <div class="cap"><b>IV</b><span class="t" data-en="Contrarian Theory">Teoria do Contrário</span><span></span></div>
+    <h2><span class="t" data-en="AI used to &lt;em&gt;challenge the physician&lt;/em&gt;">A IA usada para <em>contestar o médico</em></span></h2>
+    <p class="lead"><span class="t" data-en="Each trio defends a position and asks the AI to argue the opposite side, with evidence. Tap a controversy to see both sides.">Cada trio defende uma posição e pede à IA que argumente, com evidência, o lado oposto. Toque numa controvérsia para ver os dois lados.</span></p>
     <div class="cvs" id="cvs"></div>
-    <div class="veredictos">Veredictos possíveis <span>mantém a posição</span><span>muda</span><span>depende do contexto</span><span>falta evidência</span></div>
-    <p class="fecho">Nenhuma controvérsia do curso trata de alimentação ou nutrição enteral.</p>
+    <div class="veredictos"><span class="t" data-en="Possible verdicts ">Veredictos possíveis </span><span><span class="t" data-en="keep the position">mantém a posição</span></span><span><span class="t" data-en="change it">muda</span></span><span><span class="t" data-en="it depends on context">depende do contexto</span></span><span><span class="t" data-en="not enough evidence">falta evidência</span></span></div>
+    <p class="fecho"><span class="t" data-en="No controversy in the course deals with infant feeding or enteral nutrition.">Nenhuma controvérsia do curso trata de alimentação ou nutrição enteral.</span></p>
   </div>
 </section>
 
 <section class="serie" id="serie">
   <div class="wrap">
-    <div class="cap"><b>V</b>Série nacional<span></span></div>
-    <h2>Uma aula, <em>sessenta minutos</em></h2>
-    <p class="lead">Grupos de neonatologistas reunidos em várias cidades, por volta das 19h, diante de uma tela grande. O instrutor demonstra durante 45 minutos e responde às perguntas das cidades nos 15 seguintes. A Nestlé organiza os encontros, e todas as aulas são gravadas e editadas em capítulos.</p>
+    <div class="cap"><b>V</b><span class="t" data-en="National series">Série nacional</span><span></span></div>
+    <h2><span class="t" data-en="One class, &lt;em&gt;sixty minutes&lt;/em&gt;">Uma aula, <em>sessenta minutos</em></span></h2>
+    <p class="lead"><span class="t" data-en="Groups of neonatologists gathered in several cities, around 7 pm, in front of a large screen. The instructor demonstrates for 45 minutes and answers questions from the cities in the following 15. Nestlé organizes the gatherings, and every class is recorded and edited into chapters.">Grupos de neonatologistas reunidos em várias cidades, por volta das 19h, diante de uma tela grande. O instrutor demonstra durante 45 minutos e responde às perguntas das cidades nos 15 seguintes. A Nestlé organiza os encontros, e todas as aulas são gravadas e editadas em capítulos.</span></p>
     <div class="tempo" id="tempo">
-      <canvas id="aula3d" class="cena3d" aria-hidden="true"></canvas>
+      <div class="palco"><canvas id="aula3d" class="cena3d" aria-hidden="true"></canvas><div class="gesto" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 17V8.5a1.8 1.8 0 0 1 3.6 0V15"/><path d="M16.6 14v-1.6a1.8 1.8 0 0 1 3.6 0V15"/><path d="M20.2 14.2a1.8 1.8 0 0 1 3.6 0v4.6c0 4.2-2.8 7.2-7 7.2h-1.2c-2.4 0-3.9-.9-5.2-2.6l-3-4a1.9 1.9 0 0 1 2.9-2.4L13 19"/><path d="M4 7h5M4 7l2-2M4 7l2 2"/><path d="M28 7h-5M28 7l-2-2M28 7l-2 2"/></svg><span class="gesto-txt">Arraste para girar</span></div></div>
       <div class="barra" role="img" aria-label="Linha do tempo de uma aula de 60 minutos">
-        <div style="flex:5;background:#8A9BE8">Gancho</div>
-        <div style="flex:12;background:var(--foto)">Ato 1</div>
-        <div style="flex:12;background:#4466E0">Ato 2</div>
-        <div style="flex:11;background:#3350C2">Ato 3</div>
+        <div style="flex:5;background:#8A9BE8"><span class="t" data-en="Hook">Gancho</span></div>
+        <div style="flex:12;background:var(--foto)"><span class="t" data-en="Act 1">Ato 1</span></div>
+        <div style="flex:12;background:#4466E0"><span class="t" data-en="Act 2">Ato 2</span></div>
+        <div style="flex:11;background:#3350C2"><span class="t" data-en="Act 3">Ato 3</span></div>
         <div style="flex:2;background:var(--monitor)"></div>
         <div style="flex:1;background:var(--ambar)"></div>
         <div style="flex:2;background:#8EA3BD"></div>
-        <div style="flex:15;background:#3A5285">Perguntas</div>
+        <div style="flex:15;background:#3A5285"><span class="t" data-en="Questions">Perguntas</span></div>
       </div>
       <div class="marcas"><span>0</span><span>15</span><span>30</span><span>45</span><span>60 min</span></div>
       <div class="chaves">
-        <span><i style="background:#8A9BE8"></i>Gancho: a IA defende o lado contrário</span>
-        <span><i style="background:var(--monitor)"></i>Colheita do gancho</span>
-        <span><i style="background:var(--ambar)"></i>Minuto ético</span>
-        <span><i style="background:#8EA3BD"></i>QR code com os prompts</span>
+        <span><i style="background:#8A9BE8"></i><span class="t" data-en="Hook: the AI argues the other side">Gancho: a IA defende o lado contrário</span></span>
+        <span><i style="background:var(--monitor)"></i><span class="t" data-en="Hook verdict">Colheita do gancho</span></span>
+        <span><i style="background:var(--ambar)"></i><span class="t" data-en="Ethics minute">Minuto ético</span></span>
+        <span><i style="background:#8EA3BD"></i><span class="t" data-en="QR code with the prompts">QR code com os prompts</span></span>
       </div>
     </div>
     <div class="aulas" id="aulas"></div>
-    <p class="fecho">Na última aula, as cinco perguntas éticas aparecem juntas na tela. Em todas elas, a responsabilidade final é do médico.</p>
+    <p class="fecho"><span class="t" data-en="In the last class, the five ethics questions appear together on screen. In every one of them, the final responsibility lies with the physician.">Na última aula, as cinco perguntas éticas aparecem juntas na tela. Em todas elas, a responsabilidade final é do médico.</span></p>
   </div>
 </section>
 
 <section class="situa">
   <div class="wrap">
-    <div class="cap"><b>VI</b>Onde se situa<span></span></div>
-    <h2>O passo seguinte a <em>um curso introdutório</em></h2>
-    <p class="lead">Cursos introdutórios ensinam a escrever bons pedidos à IA. O AIMED Neonatal parte desse ponto e vai até a ferramenta construída pelo próprio neonatologista.</p>
+    <div class="cap"><b>VI</b><span class="t" data-en="Where it fits">Onde se situa</span><span></span></div>
+    <h2><span class="t" data-en="The next step after &lt;em&gt;an introductory course&lt;/em&gt;">O passo seguinte a <em>um curso introdutório</em></span></h2>
+    <p class="lead"><span class="t" data-en="Introductory courses teach how to write good requests to AI. AIMED Neonatal starts from there and goes all the way to a tool built by the neonatologist.">Cursos introdutórios ensinam a escrever bons pedidos à IA. O AIMED Neonatal parte desse ponto e vai até a ferramenta construída pelo próprio neonatologista.</span></p>
     <div class="comp">
-      <div class="a t">Nível introdutório</div><div class="b t">AIMED Neonatal</div>
-      <div class="a">Conteúdo geral, sem foco numa especialidade</div><div class="b">UTI neonatal: cálculo, procedimento e controvérsias da especialidade</div>
-      <div class="a">Prompts prontos</div><div class="b">Skills, ferramentas e agentes funcionando ao fim de cada aula</div>
-      <div class="a">Checklists para validar respostas</div><div class="b">A IA usada para contestar a posição do próprio médico</div>
-      <div class="a">Boas práticas de proteção de dados</div><div class="b">Resolução CFM nº 2.454/2026 discutida em forma de pergunta, aula a aula</div>
-      <div class="a">Material de apoio em PDF</div><div class="b">Site da turma e páginas das aulas, atualizáveis quando as ferramentas mudam</div>
-      <div class="a">Demonstração de ferramentas existentes</div><div class="b">Exemplos tirados de ferramentas que o instrutor construiu e que estão em uso na rede pública de saúde</div>
+      <div class="a t"><span class="t" data-en="Introductory level">Nível introdutório</span></div><div class="b t">AIMED Neonatal</div>
+      <div class="a"><span class="t" data-en="General content, with no specialty focus">Conteúdo geral, sem foco numa especialidade</span></div><div class="b"><span class="t" data-en="Neonatal ICU: calculations, procedures and the specialty&#x27;s own controversies">UTI neonatal: cálculo, procedimento e controvérsias da especialidade</span></div>
+      <div class="a"><span class="t" data-en="Ready-made prompts">Prompts prontos</span></div><div class="b"><span class="t" data-en="Skills, tools and agents working by the end of each class">Skills, ferramentas e agentes funcionando ao fim de cada aula</span></div>
+      <div class="a"><span class="t" data-en="Checklists to validate answers">Checklists para validar respostas</span></div><div class="b"><span class="t" data-en="AI used to challenge the physician&#x27;s own position">A IA usada para contestar a posição do próprio médico</span></div>
+      <div class="a"><span class="t" data-en="Data protection best practices">Boas práticas de proteção de dados</span></div><div class="b"><span class="t" data-en="CFM Resolution 2,454/2026 discussed as questions, class by class">Resolução CFM nº 2.454/2026 discutida em forma de pergunta, aula a aula</span></div>
+      <div class="a"><span class="t" data-en="PDF handouts">Material de apoio em PDF</span></div><div class="b"><span class="t" data-en="A cohort website and class pages, updated whenever the tools change">Site da turma e páginas das aulas, atualizáveis quando as ferramentas mudam</span></div>
+      <div class="a"><span class="t" data-en="Demos of existing tools">Demonstração de ferramentas existentes</span></div><div class="b"><span class="t" data-en="Examples drawn from tools the instructor built, in use in the public health system">Exemplos tirados de ferramentas que o instrutor construiu e que estão em uso na rede pública de saúde</span></div>
     </div>
   </div>
 </section>
 
 <section class="invest" id="investimento">
   <div class="wrap">
-    <div class="cap"><b>VII</b>Investimento<span></span></div>
-    <h2>Duas formas de <em>organizar a imersão</em></h2>
-    <p class="lead">O valor é fechado por turma de até 15 participantes, e a Nestlé escolhe quem cuida da logística.</p>
+    <div class="cap"><b>VII</b><span class="t" data-en="Investment">Investimento</span><span></span></div>
+    <h2><span class="t" data-en="Two ways to &lt;em&gt;organize the immersion&lt;/em&gt;">Duas formas de <em>organizar a imersão</em></span></h2>
+    <p class="lead"><span class="t" data-en="The fee is fixed per cohort of up to 15 participants, and Nestlé chooses who handles logistics.">O valor é fechado por turma de até 15 participantes, e a Nestlé escolhe quem cuida da logística.</span></p>
     <div class="opcoes">
-      <div class="op"><h3>Opção A · Organização INOVAMED</h3><div class="preco">R$ 37.500</div><div class="por">por turma</div><p>Local, infraestrutura, cafés e pessoa de apoio por conta da INOVAMED. Somente para imersão em Joinville.</p></div>
-      <div class="op b"><h3>Opção B · Organização Nestlé</h3><div class="preco">R$ 30.000</div><div class="por">por turma</div><p>A Nestlé organiza o evento, em qualquer cidade.</p></div>
+      <div class="op"><h3><span class="t" data-en="Option A · Organized by INOVAMED">Opção A · Organização INOVAMED</span></h3><div class="preco"><span class="t" data-en="R$ 37,500">R$ 37.500</span></div><div class="por"><span class="t" data-en="per cohort">por turma</span></div><p><span class="t" data-en="Venue, equipment, coffee breaks and on-site support provided by INOVAMED. Only for an immersion in Joinville.">Local, infraestrutura, cafés e pessoa de apoio por conta da INOVAMED. Somente para imersão em Joinville.</span></p></div>
+      <div class="op b"><h3><span class="t" data-en="Option B · Organized by Nestlé">Opção B · Organização Nestlé</span></h3><div class="preco"><span class="t" data-en="R$ 30,000">R$ 30.000</span></div><div class="por"><span class="t" data-en="per cohort">por turma</span></div><p><span class="t" data-en="Nestlé organizes the event, in any city.">A Nestlé organiza o evento, em qualquer cidade.</span></p></div>
     </div>
     <ul class="inclui">
-      <li>Sessão online de preparação</li>
-      <li>Imersão presencial de um dia e meio</li>
-      <li>Site exclusivo da turma</li>
-      <li>Demo Day online, 60 dias depois</li>
-      <li>Crachás e certificados de 13 horas</li>
+      <li><span class="t" data-en="Online preparation session">Sessão online de preparação</span></li>
+      <li><span class="t" data-en="A day and a half in-person immersion">Imersão presencial de um dia e meio</span></li>
+      <li><span class="t" data-en="Dedicated cohort website">Site exclusivo da turma</span></li>
+      <li><span class="t" data-en="Online Demo Day, 60 days later">Demo Day online, 60 dias depois</span></li>
+      <li><span class="t" data-en="Badges and 13-hour certificates">Crachás e certificados de 13 horas</span></li>
     </ul>
-    <p class="miudo">Fora de Joinville, deslocamento e hospedagem do instrutor ficam a cargo da Nestlé. A série nacional de cinco aulas tem valor sob consulta, definido com o calendário e o número de cidades. Condições de pagamento a combinar.</p>
-    <p class="miudo">O conteúdo trata exclusivamente de IA aplicada à prática médica. Nenhuma aula ou material menciona produtos ou marcas da Nestlé, nem trata de alimentação infantil, e o enquadramento institucional dos eventos na NBCAL (Lei nº 11.265/2006) fica a critério da Nestlé. A metodologia, os prompts, as Skills e as ferramentas do curso são propriedade intelectual da INOVAMED. Nenhum dado identificável de paciente é usado em aula.</p>
+    <p class="miudo"><span class="t" data-en="Outside Joinville, the instructor&#x27;s travel and lodging are covered by Nestlé. The five-class national series is quoted on request, based on the calendar and number of cities. Payment terms to be agreed.">Fora de Joinville, deslocamento e hospedagem do instrutor ficam a cargo da Nestlé. A série nacional de cinco aulas tem valor sob consulta, definido com o calendário e o número de cidades. Condições de pagamento a combinar.</span></p>
+    <p class="miudo"><span class="t" data-en="The content deals exclusively with AI applied to medical practice. No class or material mentions Nestlé products or brands or covers infant feeding, and the institutional framing of the events under Brazil&#x27;s NBCAL code (Law 11,265/2006) is at Nestlé&#x27;s discretion. The methodology, prompts, Skills and course tools are INOVAMED&#x27;s intellectual property. No identifiable patient data is used in class.">O conteúdo trata exclusivamente de IA aplicada à prática médica. Nenhuma aula ou material menciona produtos ou marcas da Nestlé, nem trata de alimentação infantil, e o enquadramento institucional dos eventos na NBCAL (Lei nº 11.265/2006) fica a critério da Nestlé. A metodologia, os prompts, as Skills e as ferramentas do curso são propriedade intelectual da INOVAMED. Nenhum dado identificável de paciente é usado em aula.</span></p>
   </div>
 </section>
 
 <section class="instrutor" id="instrutor">
   <div class="wrap">
-    <div class="cap"><b>VIII</b>Quem conduz<span></span></div>
+    <div class="cap"><b>VIII</b><span class="t" data-en="Who leads it">Quem conduz</span><span></span></div>
     <div class="bio">
-      <figure class="retrato"><img src="foto-mbula.jpg" alt="Dr. Mbula Luzingu Barros" width="900" height="1125" loading="lazy"><figcaption><b>Dr. Mbula Luzingu Barros</b><span>Médico intensivista pediátrico</span></figcaption></figure>
+      <figure class="retrato"><img src="foto-mbula.jpg" alt="Dr. Mbula Luzingu Barros" width="900" height="1125" loading="lazy"><figcaption><b>Dr. Mbula Luzingu Barros</b><span><span class="t" data-en="Pediatric intensivist">Médico intensivista pediátrico</span></span></figcaption></figure>
       <div>
-        <p class="frase">Dr. Mbula Luzingu Barros constrói as tecnologias de que fala.</p>
-        <div class="fato"><span class="v">40 min <s>/</s> 4 s</span><small>tempo de análise de cada termo de estágio antes e depois do robô que ele desenvolveu para a rede pública de saúde</small></div>
+        <p class="frase"><span class="t" data-en="Dr. Mbula Luzingu Barros builds the technologies he talks about.">Dr. Mbula Luzingu Barros constrói as tecnologias de que fala.</span></p>
+        <div class="fato"><span class="v">40 min <s>/</s> 4 s</span><small><span class="t" data-en="time to review each internship agreement, before and after the bot he built for the public health system">tempo de análise de cada termo de estágio antes e depois do robô que ele desenvolveu para a rede pública de saúde</span></small></div>
       <div class="bio-texto">
-        <p>Médico intensivista pediátrico, com mais de 25 anos de atuação em terapia intensiva. Desenvolveu sistemas e robôs de inteligência artificial hoje em uso na rede pública de saúde de Santa Catarina: gestão de leitos neonatais, vigilância epidemiológica, cirurgia segura, fluxos de recursos humanos. O sistema de gestão de leitos neonatais foi apresentado no Hackathon de Harvard (hub Brasília).</p>
-        <p>Em 2023, criou e publicou na Play Store um aplicativo médico voltado ao autismo, que em 2024 evoluiu para o portal inovamed.pro. Criador da metodologia AIMED, ministra cursos de IA para médicos e equipes multiprofissionais desde agosto de 2024, com turmas em Joinville, Goiânia e Recife.</p>
-        <p>Usou a IA como método de estudo e conquistou o 1º lugar no concurso estadual para médico pediatra de Santa Catarina, experiência documentada no livro <i>100 Pontos</i>, publicado na Amazon.</p>
-        <p>Por construir inteligência artificial para a saúde, conhece de perto os limites que ela precisa respeitar.</p>
+        <p><span class="t" data-en="Pediatric intensivist with more than 25 years in intensive care. He developed artificial intelligence systems and bots now in use in the public health system of Santa Catarina, Brazil: neonatal bed management, epidemiological surveillance, safe surgery and human resources workflows. The neonatal bed management system was presented at the Harvard Hackathon (Brasília hub).">Médico intensivista pediátrico, com mais de 25 anos de atuação em terapia intensiva. Desenvolveu sistemas e robôs de inteligência artificial hoje em uso na rede pública de saúde de Santa Catarina: gestão de leitos neonatais, vigilância epidemiológica, cirurgia segura, fluxos de recursos humanos. O sistema de gestão de leitos neonatais foi apresentado no Hackathon de Harvard (hub Brasília).</span></p>
+        <p><span class="t" data-en="In 2023 he created and published on the Play Store a medical app focused on autism, which in 2024 grew into the inovamed.pro portal. Creator of the AIMED methodology, he has taught AI courses for physicians and multidisciplinary teams since August 2024, with cohorts in Joinville, Goiânia and Recife.">Em 2023, criou e publicou na Play Store um aplicativo médico voltado ao autismo, que em 2024 evoluiu para o portal inovamed.pro. Criador da metodologia AIMED, ministra cursos de IA para médicos e equipes multiprofissionais desde agosto de 2024, com turmas em Joinville, Goiânia e Recife.</span></p>
+        <p><span class="t" data-en="He used AI as a study method and took 1st place in Santa Catarina&#x27;s state civil service exam for pediatricians, an experience documented in his book &lt;i&gt;100 Pontos&lt;/i&gt;, published on Amazon.">Usou a IA como método de estudo e conquistou o 1º lugar no concurso estadual para médico pediatra de Santa Catarina, experiência documentada no livro <i>100 Pontos</i>, publicado na Amazon.</span></p>
+        <p><span class="t" data-en="Because he builds artificial intelligence for healthcare, he knows firsthand the limits it must respect.">Por construir inteligência artificial para a saúde, conhece de perto os limites que ela precisa respeitar.</span></p>
       </div>
     </div>
   </div>
@@ -524,19 +541,19 @@ details.aula[open] .mais{transform:rotate(45deg);background:#12284D}
 
 <section class="fim" id="proximos">
   <div class="wrap">
-    <div class="cap"><b>IX</b>Próximos passos<span></span></div>
-    <h2>Do aceite à <em>primeira turma</em></h2>
+    <div class="cap"><b>IX</b><span class="t" data-en="Next steps">Próximos passos</span><span></span></div>
+    <h2><span class="t" data-en="From approval to &lt;em&gt;the first cohort&lt;/em&gt;">Do aceite à <em>primeira turma</em></span></h2>
     <ol class="passos">
-      <li><b>1</b>Escolha entre as opções A e B</li>
-      <li><b>2</b>Data e cidade da imersão</li>
-      <li><b>3</b>Calendário e cidades da série nacional</li>
-      <li><b>4</b>Valor da série, a partir do calendário</li>
-      <li><b>5</b>Contrato, com uso das gravações e propriedade intelectual</li>
-      <li><b>6</b>Sessão de preparação, de 7 a 3 dias antes da imersão</li>
+      <li><b>1</b><span class="t" data-en="Choose between options A and B">Escolha entre as opções A e B</span></li>
+      <li><b>2</b><span class="t" data-en="Immersion date and city">Data e cidade da imersão</span></li>
+      <li><b>3</b><span class="t" data-en="National series calendar and cities">Calendário e cidades da série nacional</span></li>
+      <li><b>4</b><span class="t" data-en="Series fee, based on the calendar">Valor da série, a partir do calendário</span></li>
+      <li><b>5</b><span class="t" data-en="Contract, covering use of recordings and intellectual property">Contrato, com uso das gravações e propriedade intelectual</span></li>
+      <li><b>6</b><span class="t" data-en="Preparation session, 7 to 3 days before the immersion">Sessão de preparação, de 7 a 3 dias antes da imersão</span></li>
     </ol>
     <div class="assinatura">
       <div class="grande">AIMED <em>Neonatal</em></div>
-      <div class="dir">INOVAMED · <a href="https://inovamed.pro">inovamed.pro</a><br>Proposta comercial confidencial<br>Válida até 20 de novembro de 2026</div>
+      <div class="dir">INOVAMED · <a href="https://inovamed.pro">inovamed.pro</a><br><span class="t" data-en="Confidential commercial proposal">Proposta comercial confidencial</span><br><span class="t" data-en="Valid until November 20, 2026">Válida até 20 de novembro de 2026</span></div>
     </div>
   </div>
 </section>
@@ -547,6 +564,10 @@ details.aula[open] .mais{transform:rotate(45deg);background:#12284D}
 <script>
 const $=id=>document.getElementById(id);
 const reduz=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let LANG='pt';
+try{const q=new URLSearchParams(location.search).get('lang');const g=localStorage.getItem('aimed-lang');LANG=(q==='en'||q==='pt')?q:(g==='en'?'en':'pt')}catch(e){}
+const T=(pt,en)=>LANG==='en'?en:pt;
+const toque=matchMedia('(pointer: coarse)').matches;
 
 /* barra superior e progresso */
 const topo=$('topo'),prog=$('progresso'),links=[...document.querySelectorAll('.topo nav a')];
@@ -560,27 +581,27 @@ function rolar(){
 }
 addEventListener('scroll',rolar,{passive:true});rolar();
 const mb=$('menu-btn'),nv=$('indice');
-function menu(on){nv.classList.toggle('aberto',on);topo.classList.toggle('menu-aberto',on);mb.setAttribute('aria-expanded',on);mb.querySelector('span').textContent=on?'Fechar':'Índice';document.body.style.overflow=on?'hidden':'';$('subir').style.visibility=on?'hidden':''}
+function menu(on){nv.classList.toggle('aberto',on);topo.classList.toggle('menu-aberto',on);mb.setAttribute('aria-expanded',on);mb.querySelector('span').textContent=on?T('Fechar','Close'):T('Índice','Contents');document.body.style.overflow=on?'hidden':'';$('subir').style.visibility=on?'hidden':''}
 mb.addEventListener('click',()=>menu(!nv.classList.contains('aberto')));
 nv.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu(false)));
 addEventListener('keydown',e=>{if(e.key==='Escape')menu(false)});
 $('subir').addEventListener('click',()=>scrollTo({top:0,behavior:reduz?'auto':'smooth'}));
 
 /* calculadora */
-const fmt=(n,d=1)=>n.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
+const fmt=(n,d=1)=>n.toLocaleString(LANG==='en'?'en-US':'pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
 let tigAtual=6.9;
 function pintaFaixa(el){const p=(el.value-el.min)/(el.max-el.min)*100;el.style.setProperty('--p',p+'%')}
 function calc(){
   const p=+$('peso').value,v=+$('vol').value,g=+$('glic').value,gd=g%1?1:0;
   ['peso','vol','glic'].forEach(id=>pintaFaixa($(id)));
-  $('o-peso').textContent=fmt(p,2)+' kg';$('o-vol').textContent=v+' mL/kg/dia';$('o-glic').textContent=fmt(g,gd)+'%';
+  $('o-peso').textContent=fmt(p,2)+' kg';$('o-vol').textContent=v+T(' mL/kg/dia',' mL/kg/day');$('o-glic').textContent=fmt(g,gd)+'%';
   const volDia=v*p,gDia=volDia*g/100,tig=gDia*1000/p/1440;
   tigAtual=tig;$('v-tig').textContent=fmt(tig);
   $('passos').innerHTML=
-   `<li>Volume diário: ${v} mL/kg/dia × ${fmt(p,2)} kg = <b>${fmt(volDia)} mL/dia</b></li>`+
-   `<li>Glicose ofertada: ${fmt(volDia)} mL × ${fmt(g,gd)} g/100 mL = <b>${fmt(gDia,2)} g/dia</b></li>`+
-   `<li>Por quilo e por minuto: ${fmt(gDia,2)} g × 1.000 ÷ ${fmt(p,2)} kg ÷ 1.440 min = <b>${fmt(tig)} mg/kg/min</b></li>`+
-   `<li class="atalho">Atalho conferido: (${fmt(g,gd)} × ${v}) ÷ 144 = ${fmt(g*v/144)} mg/kg/min</li>`;
+   `<li>${T('Volume diário','Daily volume')}: ${v} ${T('mL/kg/dia','mL/kg/day')} × ${fmt(p,2)} kg = <b>${fmt(volDia)} ${T('mL/dia','mL/day')}</b></li>`+
+   `<li>${T('Glicose ofertada','Glucose delivered')}: ${fmt(volDia)} mL × ${fmt(g,gd)} g/100 mL = <b>${fmt(gDia,2)} ${T('g/dia','g/day')}</b></li>`+
+   `<li>${T('Por quilo e por minuto','Per kilogram per minute')}: ${fmt(gDia,2)} g × ${T('1.000','1,000')} ÷ ${fmt(p,2)} kg ÷ ${T('1.440','1,440')} min = <b>${fmt(tig)} mg/kg/min</b></li>`+
+   `<li class="atalho">${T('Atalho conferido','Shortcut check')}: (${fmt(g,gd)} × ${v}) ÷ 144 = ${fmt(g*v/144)} mg/kg/min</li>`;
 }
 ['peso','vol','glic'].forEach(id=>$(id).addEventListener('input',calc));calc();
 
@@ -640,18 +661,19 @@ function barras3D(canvas,fileiras,o){
   function tam(){const w=canvas.clientWidth,h=canvas.clientHeight;r.setPixelRatio(Math.min(devicePixelRatio,2));r.setSize(w,h,false);cam.aspect=w/h;
     const tf=Math.tan(THREE.MathUtils.degToRad(15)),d=Math.max((L*(cam.aspect<2?.7:.6))/(tf*cam.aspect),2.6/tf);cam.position.set(0,d*.6,d*.8);cam.lookAt(0,.2,0);cam.updateProjectionMatrix()}
   addEventListener('resize',tam);tam();
-  let ry=o.ry||-.35,ay=ry,arr=null,cresce=0,visto=false;
+  const rb=o.ry||-.35;let ry=rb,ay=rb,off=0,vel=0,arr=null,cresce=0,visto=false;
   new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)visto=true}),{threshold:.3}).observe(canvas);
   canvas.style.cursor='grab';
-  canvas.addEventListener('pointerdown',e=>{arr={x:e.clientX,y:ay};canvas.style.cursor='grabbing'});
+  canvas.addEventListener('pointerdown',e=>{arr={x:e.clientX,off:off,last:e.clientX,k:e.pointerType==='touch'?.014:.008};vel=0;canvas.style.cursor='grabbing';canvas.dispatchEvent(new Event('girou'))});
   addEventListener('pointercancel',()=>arr=null);
   addEventListener('pointerup',()=>{arr=null;canvas.style.cursor='grab'});
-  addEventListener('pointermove',e=>{if(arr)ay=Math.max(-1.2,Math.min(1.2,arr.y+(e.clientX-arr.x)*.006))});
+  addEventListener('pointermove',e=>{if(!arr)return;off=arr.off+(e.clientX-arr.x)*arr.k;vel=(e.clientX-arr.last)*arr.k;arr.last=e.clientX});
   const t0=performance.now();
   (function q(t){
     if(visto&&cresce<1)cresce=reduz?1:Math.min(1,cresce+.025);
     const e=1-Math.pow(1-cresce,3);blocos.forEach((b,i)=>{const d=Math.min(1,Math.max(0,e*1.6-i*.02));b.scale.y=Math.max(.001,d)});
-    if(!reduz&&!arr)ay=(o.ry||-.35)+Math.sin((t-t0)/2600)*.12;
+    if(!arr&&Math.abs(vel)>.0005){off+=vel;vel*=.92}
+    ay=rb+off+(reduz||arr?0:Math.sin((t-t0)/2600)*.1);
     ry+=(ay-ry)*.08;g.rotation.y=ry;
     r.render(cena,cam);requestAnimationFrame(q);
   })(t0);
@@ -666,24 +688,51 @@ if(barras3D($('aula3d'),[[{m:5,c:0x8A9BE8},{m:12,c:0x5B7CFA},{m:12,c:0x4466E0},{
 
 /* controvérsias */
 const cvs=[
- ['Transfusão no prematuro','Limiar restritivo de hemoglobina','Limiar liberal','TOP · Kirpalani · NEJM · 2020; ETTNO · Franz · JAMA · 2020'],
- ['Persistência do canal arterial','Tratar o canal','Conduta expectante','BeNeDuctus · Hundscheid · NEJM · 2023'],
- ['Displasia broncopulmonar','Hidrocortisona profilática','Não usar de rotina','PREMILOC · Baud · Lancet · 2016'],
- ['Sepse precoce','Antibiótico por fator de risco','Calculadora de risco','Calculadora de sepse precoce da Kaiser Permanente'],
- ['Cânula traqueal','Regra "peso + 6"','Tabela por idade gestacional','Nasce do próprio laboratório de cálculos']
+ [['Transfusão no prematuro','Transfusion in preterm infants'],['Limiar restritivo de hemoglobina','Restrictive hemoglobin threshold'],['Limiar liberal','Liberal threshold'],'TOP · Kirpalani · NEJM · 2020; ETTNO · Franz · JAMA · 2020'],
+ [['Persistência do canal arterial','Patent ductus arteriosus'],['Tratar o canal','Treat the duct'],['Conduta expectante','Expectant management'],'BeNeDuctus · Hundscheid · NEJM · 2023'],
+ [['Displasia broncopulmonar','Bronchopulmonary dysplasia'],['Hidrocortisona profilática','Prophylactic hydrocortisone'],['Não usar de rotina','No routine use'],'PREMILOC · Baud · Lancet · 2016'],
+ [['Sepse precoce','Early-onset sepsis'],['Antibiótico por fator de risco','Antibiotics based on risk factors'],['Calculadora de risco','Risk calculator'],['Calculadora de sepse precoce da Kaiser Permanente','Kaiser Permanente early-onset sepsis calculator']],
+ [['Cânula traqueal','Endotracheal tube'],['Regra "peso + 6"','The "weight + 6" rule'],['Tabela por idade gestacional','Gestational age table'],['Nasce do próprio laboratório de cálculos','Comes from the calculations lab itself']]
 ];
-$('cvs').innerHTML=cvs.map((c,i)=>`<div class="cv"><button aria-expanded="false" aria-controls="lado${i}"><span class="i">${i+1}</span><span><h3>${c[0]}</h3><span class="ev">${c[3]}</span></span><span class="acao">Pedir o contrário</span></button><div class="lados" id="lado${i}"><div class="lado"><small>O médico defende</small>${c[1]}</div><div class="lado ia"><small>A IA argumenta, com evidência</small>${c[2]}</div></div></div>`).join('');
-document.querySelectorAll('.cv button').forEach(b=>b.addEventListener('click',()=>{const cv=b.parentElement,on=!cv.hasAttribute('data-aberto');cv.toggleAttribute('data-aberto',on);b.setAttribute('aria-expanded',on);b.querySelector('.acao').textContent=on?'Fechar':'Pedir o contrário'}));
+const L=x=>Array.isArray(x)?T(x[0],x[1]):x;
+function rendCvs(){
+  $('cvs').innerHTML=cvs.map((c,i)=>`<div class="cv"><button aria-expanded="false" aria-controls="lado${i}"><span class="i">${i+1}</span><span><h3>${L(c[0])}</h3><span class="ev">${L(c[3])}</span></span><span class="acao">${T('Pedir o contrário','Ask for the opposite')}</span></button><div class="lados" id="lado${i}"><div class="lado"><small>${T('O médico defende','The physician argues')}</small>${L(c[1])}</div><div class="lado ia"><small>${T('A IA argumenta, com evidência','The AI argues, with evidence')}</small>${L(c[2])}</div></div></div>`).join('');
+  document.querySelectorAll('.cv button').forEach(b=>b.addEventListener('click',()=>{const cv=b.parentElement,on=!cv.hasAttribute('data-aberto');cv.toggleAttribute('data-aberto',on);b.setAttribute('aria-expanded',on);b.querySelector('.acao').textContent=on?T('Fechar','Close'):T('Pedir o contrário','Ask for the opposite')}));
+}
 
 /* aulas */
 const aulas=[
- ['Do prompt ao método: AIMED na UTIN','Transfusão no prematuro: restritivo ou liberal',['Pedido comum e pedido AIMED, lado a lado','Perfil Clínico Permanente','Evolução ditada por voz e transformada em texto de prontuário'],'Você ditou e a IA escreveu a evolução. Quem assina, e o que precisa constar no prontuário?'],
- ['Cálculos neonatais e o erro de 10×','Cânula: "peso + 6" ou tabela por idade gestacional',['TIG como Skill','Drogas vasoativas com alerta de dose máxima','Calculadora de fototerapia (AAP 2022)'],'A calculadora errou a vírgula e você não conferiu. De quem é o erro?'],
- ['A IA lê o exame neonatal','Sepse precoce: calculadora de risco ou antibiótico por fator de risco',['Gasometria','Hemograma e PCR seriados','Laudo de ecocardiograma ou de ultrassonografia transfontanelar'],'Você colou a gasometria com o nome do bebê no chat. O que aconteceu com esse dado?'],
- ['Gemini Notebook: a biblioteca da sua UTIN','Hidrocortisona profilática para displasia broncopulmonar',['Dúvida de plantão transformada em PICO, busca e fontes reais','Os ensaios carregados no Notebook, com conferência do trecho citado','A IA defende o lado contrário, e o veredicto sai das fontes'],'A IA citou um estudo que você não abriu. Dá para mudar uma conduta com base nele?'],
- ['Do 3D ao agente','Persistência do canal arterial: tratar ou esperar',['Cateter umbilical em 3D com a profundidade calculada','Agente que avisa a janela de rastreio de cada prematuro','Ética e comunicação com os pais'],'A mãe pergunta: foi o computador que decidiu? O que você responde?']
+ [['Do prompt ao método: AIMED na UTIN','From prompt to method: AIMED in the NICU'],['Transfusão no prematuro: restritivo ou liberal','Transfusion in preterm infants: restrictive or liberal'],[['Pedido comum e pedido AIMED, lado a lado','A plain request and an AIMED request, side by side'],['Perfil Clínico Permanente','Permanent Clinical Profile'],['Evolução ditada por voz e transformada em texto de prontuário','Progress note dictated by voice and turned into chart-ready text']],['Você ditou e a IA escreveu a evolução. Quem assina, e o que precisa constar no prontuário?','You dictated and the AI wrote the progress note. Who signs it, and what must go in the medical record?']],
+ [['Cálculos neonatais e o erro de 10×','Neonatal calculations and the 10-fold error'],['Cânula: "peso + 6" ou tabela por idade gestacional','Endotracheal tube: "weight + 6" or gestational age table'],[['TIG como Skill','Glucose infusion rate as a Skill'],['Drogas vasoativas com alerta de dose máxima','Vasoactive drugs with a maximum-dose alert'],['Calculadora de fototerapia (AAP 2022)','Phototherapy calculator (AAP 2022)']],['A calculadora errou a vírgula e você não conferiu. De quem é o erro?','The calculator misplaced the decimal point and you did not check. Whose error is it?']],
+ [['A IA lê o exame neonatal','AI reads the neonatal workup'],['Sepse precoce: calculadora de risco ou antibiótico por fator de risco','Early-onset sepsis: risk calculator or antibiotics based on risk factors'],[['Gasometria','Blood gas'],['Hemograma e PCR seriados','Serial blood count and CRP'],['Laudo de ecocardiograma ou de ultrassonografia transfontanelar','Echocardiogram or cranial ultrasound report']],['Você colou a gasometria com o nome do bebê no chat. O que aconteceu com esse dado?','You pasted the blood gas with the baby\'s name into the chat. What happened to that data?']],
+ [['Gemini Notebook: a biblioteca da sua UTIN','Gemini Notebook: your NICU library'],['Hidrocortisona profilática para displasia broncopulmonar','Prophylactic hydrocortisone for bronchopulmonary dysplasia'],[['Dúvida de plantão transformada em PICO, busca e fontes reais','A bedside question turned into PICO, a search and real sources'],['Os ensaios carregados no Notebook, com conferência do trecho citado','The trials loaded into the Notebook, checking each quoted passage'],['A IA defende o lado contrário, e o veredicto sai das fontes','The AI argues the other side, and the verdict comes from the sources']],['A IA citou um estudo que você não abriu. Dá para mudar uma conduta com base nele?','The AI cited a study you never opened. Can you change management based on it?']],
+ [['Do 3D ao agente','From 3D to agents'],['Persistência do canal arterial: tratar ou esperar','Patent ductus arteriosus: treat or wait'],[['Cateter umbilical em 3D com a profundidade calculada','Umbilical catheter in 3D with the calculated depth'],['Agente que avisa a janela de rastreio de cada prematuro','An agent that flags each preterm infant\'s screening window'],['Ética e comunicação com os pais','Ethics and talking with parents']],['A mãe pergunta: foi o computador que decidiu? O que você responde?','The mother asks: did the computer decide? What do you say?']]
 ];
-$('aulas').innerHTML=aulas.map((a,i)=>`<details class="aula"${i===0?' open':''}><summary><span class="n">${i+1}</span><span><h3>${a[0]}</h3><div class="g">Gancho: ${a[1]}</div></span><span class="mais" aria-hidden="true"></span></summary><div class="atos">${a[2].map((t,j)=>`<div class="ato"><b>Ato ${j+1}</b>${t}</div>`).join('')}</div><div class="etica"><small>Minuto ético</small>“${a[3]}”</div></details>`).join('');
+function rendAulas(){
+  $('aulas').innerHTML=aulas.map((a,i)=>`<details class="aula"${i===0?' open':''}><summary><span class="n">${i+1}</span><span><h3>${L(a[0])}</h3><div class="g">${T('Gancho','Hook')}: ${L(a[1])}</div></span><span class="mais" aria-hidden="true"></span></summary><div class="atos">${a[2].map((t,j)=>`<div class="ato"><b>${T('Ato','Act')} ${j+1}</b>${L(t)}</div>`).join('')}</div><div class="etica"><small>${T('Minuto ético','Ethics minute')}</small>“${L(a[3])}”</div></details>`).join('');
+}
+
+/* idioma */
+function aplicaIdioma(l,salvar){
+  LANG=l;document.documentElement.lang=l==='en'?'en':'pt-BR';
+  document.querySelectorAll('.t').forEach(el=>{if(el.dataset.pt===undefined)el.dataset.pt=el.innerHTML;el.innerHTML=l==='en'?el.dataset.en:el.dataset.pt});
+  document.title=T('AIMED Neonatal · Proposta','AIMED Neonatal · Proposal');
+  document.querySelectorAll('.idioma button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===l));
+  document.querySelectorAll('.gesto-txt').forEach(e=>e.textContent=toque?T('Deslize para girar','Swipe to rotate'):T('Arraste para girar','Drag to rotate'));
+  $('subir').setAttribute('aria-label',T('Voltar ao topo','Back to top'));
+  $('indice').setAttribute('aria-label',T('Índice da proposta','Proposal contents'));
+  $('skyline').setAttribute('aria-label',T('Distribuição do tempo da imersão em 3D por tipo de atividade','3D breakdown of immersion time by activity type'));
+  mb.querySelector('span').textContent=nv.classList.contains('aberto')?T('Fechar','Close'):T('Índice','Contents');
+  rendCvs();rendAulas();calc();
+  if(salvar){try{localStorage.setItem('aimed-lang',l)}catch(e){}try{const u=new URL(location.href);u.searchParams.set('lang',l);history.replaceState(null,'',u)}catch(e){}}
+}
+document.querySelectorAll('.idioma button').forEach(b=>b.addEventListener('click',()=>aplicaIdioma(b.dataset.l,true)));
+aplicaIdioma(LANG,false);
+
+/* dica de gesto: some após a primeira interação */
+['cena','skyline','aula3d'].forEach(id=>{const c=$(id);if(!c)return;const g=c.parentElement.querySelector('.gesto');if(!g)return;
+  if(!window.THREE){g.remove();return}
+  c.addEventListener('girou',()=>g.classList.add('some'),{once:true})});
 
 /* cena 3D: curvas de crescimento */
 (function(){
@@ -719,8 +768,8 @@ $('aulas').innerHTML=aulas.map((a,i)=>`<details class="aula"${i===0?' open':''}>
     const largo=w>900;g.position.set(largo?3.1:0,largo?.25:2.4,0);g.scale.setScalar(largo?1:.72)}
   addEventListener('resize',tam);tam();
   let ry=-1.6,rx=.5,ay=-.9,ax=.3,mx=0,my=0,arr=null;
-  addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;if(arr){ay=arr.y+(e.clientX-arr.cx)*.006;ax=Math.max(-.5,Math.min(.5,arr.x+(e.clientY-arr.cy)*.004))}});
-  canvas.addEventListener('pointerdown',e=>{if(e.pointerType==='touch')return;arr={x:ax,y:ay,cx:e.clientX,cy:e.clientY}});
+  addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;if(arr){ay=arr.y+(e.clientX-arr.cx)*arr.k;ax=Math.max(-.5,Math.min(.5,arr.x+(e.clientY-arr.cy)*.004))}});
+  canvas.addEventListener('pointerdown',e=>{arr={x:ax,y:ay,cx:e.clientX,cy:e.clientY,k:e.pointerType==='touch'?.012:.006};canvas.dispatchEvent(new Event('girou'))});
   addEventListener('pointerup',()=>arr=null);
   const t0=performance.now(),dur=reduz?1:2600;
   function quadro(t){
