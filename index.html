@@ -6,364 +6,465 @@
 <title>AIMED Neonatal · Proposta</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Proposta INOVAMED de programa de inteligência artificial aplicada à neonatologia.">
+<meta property="og:title" content="AIMED Neonatal">
+<meta property="og:description" content="Inteligência artificial construída pelo próprio neonatologista.">
+<meta name="theme-color" content="#0E1830">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E1830'/%3E%3Cpath d='M10 44 C22 44 26 20 54 18' stroke='%232EC4B6' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='40' cy='22' r='5' fill='%23F2A541'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{
-  --noite:#13203A;      /* UTIN à noite */
-  --noite-2:#1C2D4F;
-  --acrilico:#EEF4F5;   /* acrílico da incubadora */
-  --papel:#FFFFFF;
-  --tinta:#18232F;
-  --tinta-2:#4A5866;
-  --monitor:#2EC4B6;    /* traçado do monitor */
-  --foto:#4C6EF5;       /* luz de fototerapia */
+  --noite:#0E1830;
+  --noite-2:#15223F;
+  --noite-3:#1E2E52;
+  --linha-escura:#2A3B61;
+  --acrilico:#F1F5F6;
+  --papel:#FBFCFC;
+  --tinta:#131C29;
+  --tinta-2:#55626F;
+  --linha:#DCE4E7;
+  --monitor:#2EC4B6;
+  --foto:#5B7CFA;
   --ambar:#F2A541;
-  --linha:#D5E1E4;
-  --raio-g:22px;
-  --raio-p:10px;
+  --serif:"Instrument Serif",Georgia,serif;
+  --sans:"Hanken Grotesk",system-ui,sans-serif;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--acrilico);color:var(--tinta);font:400 17px/1.6 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:"Bricolage Grotesque",sans-serif;line-height:1.08;margin:0;font-weight:800;letter-spacing:-.02em}
-h2{font-size:clamp(30px,4.2vw,48px);max-width:18ch}
-h3{font-size:21px;font-weight:600;letter-spacing:-.01em}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--papel);color:var(--tinta);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.025em;line-height:1.05}
+h2{font-size:clamp(34px,4.6vw,60px);font-weight:500;max-width:16ch}
+h2 em,.serif{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em}
+h3{font-size:19px;letter-spacing:-.01em}
 p{margin:0 0 1em}
-a{color:var(--foto)}
-:focus-visible{outline:3px solid var(--ambar);outline-offset:3px;border-radius:6px}
-.wrap{width:min(1120px,100% - 32px);margin-inline:auto}
-section{padding:96px 0}
-.lead{font-size:19px;color:var(--tinta-2);max-width:62ch;margin-top:18px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ambar);outline-offset:4px;border-radius:4px}
+.wrap{width:min(1200px,100% - 40px);margin-inline:auto}
+section{padding:clamp(88px,11vw,150px) 0;position:relative}
+.lead{font-size:clamp(18px,1.6vw,21px);line-height:1.55;color:var(--tinta-2);max-width:58ch;margin-top:26px;font-weight:400}
+.escuro{background:var(--noite);color:#E8EFF6}
+.escuro .lead{color:#AFC0D3}
+.cap{display:flex;gap:18px;align-items:baseline;margin-bottom:34px;color:var(--tinta-2);font-size:15px}
+.escuro .cap{color:#8EA3BD}
+.cap b{font-family:var(--serif);font-weight:400;font-size:22px;color:var(--foto)}
+.escuro .cap b{color:var(--monitor)}
+.cap span{flex:1;height:1px;background:currentColor;opacity:.25;align-self:center}
 
-/* HERO */
-.hero{background:radial-gradient(120% 90% at 80% 30%,var(--noite-2),var(--noite) 60%);color:#E9F1F6;padding:0;position:relative;overflow:hidden;min-height:min(92vh,820px);display:flex;align-items:center}
-#cena{position:absolute;inset:0;width:100%;height:100%;display:block}
-.hero .wrap{position:relative;z-index:2;padding:110px 0 90px}
-.hero-top{display:flex;gap:14px;flex-wrap:wrap;font-size:15px;color:#A9BCD0;margin-bottom:46px}
-.hero-top span{border:1px solid #33486E;border-radius:999px;padding:5px 14px}
-.hero h1{font-size:clamp(52px,9vw,124px);line-height:.92;letter-spacing:-.04em;max-width:9ch}
-.hero h1 small{display:block;font-size:.34em;letter-spacing:-.01em;font-weight:400;color:var(--monitor);margin-top:22px;line-height:1.15;max-width:22ch}
-.hero p{font-size:19px;color:#C8D6E4;max-width:46ch;margin-top:30px}
-.hero-legenda{position:absolute;right:24px;bottom:20px;z-index:2;font-size:13px;color:#7F96B2;max-width:34ch;text-align:right}
-@media (max-width:700px){.hero-legenda{display:none}#cena{opacity:.35}}
+/* barra superior */
+.topo{position:fixed;inset:0 0 auto 0;z-index:50;height:64px;display:flex;align-items:center;transition:background .4s,backdrop-filter .4s;color:#E8EFF6}
+.topo.solido{background:rgba(14,24,48,.82);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%)}
+.topo .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px}
+.marca{font-weight:700;letter-spacing:.02em;font-size:15px;text-decoration:none;display:flex;align-items:center;gap:10px}
+.marca i{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,var(--monitor),var(--foto));display:inline-block}
+.topo nav{display:flex;gap:26px;font-size:14px}
+.topo nav a{text-decoration:none;opacity:.72;transition:opacity .2s}
+.topo nav a:hover,.topo nav a.atual{opacity:1}
+.progresso{position:absolute;left:0;bottom:0;height:2px;width:0;background:linear-gradient(90deg,var(--monitor),var(--foto))}
+@media (max-width:900px){.topo nav{display:none}}
 
-/* JORNADA */
-.jornada{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;position:relative}
-.jornada::before{content:"";position:absolute;left:0;right:0;top:15px;height:2px;background:linear-gradient(90deg,var(--foto),var(--monitor))}
-.etapa{padding-right:24px;position:relative}
-.etapa .ponto{width:32px;height:32px;border-radius:50%;background:var(--papel);border:2px solid var(--foto);display:grid;place-items:center;font-weight:600;font-size:14px;color:var(--foto);position:relative}
-.etapa.forte .ponto{background:var(--foto);color:#fff;width:32px}
-.etapa .quando{font-size:14px;color:var(--tinta-2);margin:18px 0 4px}
-.etapa h3{margin-bottom:8px}
-.etapa p{font-size:15.5px;color:var(--tinta-2)}
-@media (max-width:820px){
-  .jornada{grid-template-columns:1fr;gap:28px}
-  .jornada::before{left:15px;right:auto;top:0;bottom:0;width:2px;height:auto;background:linear-gradient(180deg,var(--foto),var(--monitor))}
-  .etapa{padding-left:52px}.etapa .ponto{position:absolute;left:0;top:0}
-  .etapa .quando{margin-top:4px}
-}
+/* hero */
+.hero{min-height:100svh;background:radial-gradient(90% 80% at 70% 35%,#1B2B52 0%,var(--noite) 62%);color:#EEF3F8;display:flex;align-items:flex-end;overflow:hidden;padding:0}
+#cena{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(14,24,48,0) 55%,rgba(14,24,48,.85) 100%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E")}
+.hero .wrap{position:relative;z-index:2;padding:0 0 clamp(56px,9vh,96px);pointer-events:none}
+.hero .wrap *{pointer-events:auto}
+.selo{display:inline-flex;gap:12px;align-items:center;font-size:14px;color:#9FB3CB;margin-bottom:28px}
+.selo .pt{width:7px;height:7px;border-radius:50%;background:var(--monitor);box-shadow:0 0 0 6px rgba(46,196,182,.15)}
+.hero h1{font-size:clamp(64px,12.5vw,190px);line-height:.86;letter-spacing:-.055em;font-weight:600}
+.hero h1 .linha2{display:block;font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.03em;color:var(--monitor);margin-left:.06em}
+.hero-rodape{display:grid;grid-template-columns:minmax(0,520px) auto;justify-content:space-between;align-items:end;gap:32px;margin-top:40px}
+.hero-rodape p{margin:0;font-size:clamp(17px,1.5vw,20px);color:#C3D1E0;line-height:1.55}
+.hero-meta{display:grid;grid-template-columns:auto auto;gap:4px 28px;font-size:13.5px;color:#8EA3BD;text-align:right}
+.hero-meta b{color:#EEF3F8;font-weight:500}
+@media (max-width:760px){.hero-rodape{grid-template-columns:1fr}.hero-meta{text-align:left}}
+.entrada{opacity:0;transform:translateY(18px);animation:sobe 1.1s cubic-bezier(.2,.7,.2,1) forwards}
+.e2{animation-delay:.18s}.e3{animation-delay:.36s}.e4{animation-delay:.6s}
+@keyframes sobe{to{opacity:1;transform:none}}
 
-/* GRADE */
-.grade-sec{background:var(--papel)}
-.cabeca{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
-.numeros{display:flex;gap:34px}
+/* manifesto */
+.manifesto{padding:clamp(80px,10vw,130px) 0;background:var(--papel)}
+.manifesto p{font-family:var(--serif);font-size:clamp(32px,4.4vw,62px);line-height:1.08;letter-spacing:-.015em;max-width:22ch;margin:0}
+.manifesto p span{color:var(--tinta-2)}
+
+/* jornada */
+.jornada{display:grid;grid-template-columns:repeat(4,1fr);margin-top:72px;border-top:1px solid var(--linha)}
+.etapa{padding:30px 28px 10px 0;position:relative}
+.etapa+.etapa{padding-left:28px;border-left:1px solid var(--linha)}
+.etapa .num{font-family:var(--serif);font-size:64px;line-height:1;color:var(--linha);transition:color .3s}
+.etapa.foco .num{color:var(--foto)}
+.etapa .quando{font-size:14px;color:var(--tinta-2);margin:18px 0 6px}
+.etapa h3{font-size:22px;margin-bottom:10px}
+.etapa p{font-size:15.5px;color:var(--tinta-2);margin:0}
+@media (max-width:900px){.jornada{grid-template-columns:1fr 1fr}.etapa:nth-child(3){border-left:0;padding-left:0}.etapa{border-top:1px solid var(--linha)}}
+@media (max-width:560px){.jornada{grid-template-columns:1fr}.etapa+.etapa{border-left:0;padding-left:0}}
+
+/* grade */
+.grade{background:var(--acrilico)}
+.cabeca{display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap}
+.numeros{display:flex;gap:44px}
 .numeros div{font-size:14px;color:var(--tinta-2)}
-.numeros b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:40px;line-height:1;color:var(--tinta);font-weight:800}
-.abas{display:inline-flex;background:var(--acrilico);border-radius:999px;padding:5px;margin:44px 0 24px}
-.abas button{border:0;background:transparent;font:600 15px "IBM Plex Sans",sans-serif;padding:10px 22px;border-radius:999px;cursor:pointer;color:var(--tinta-2)}
-.abas button[aria-selected="true"]{background:var(--noite);color:#fff}
-.dia{display:none}.dia.ativo{display:block}
-.linha{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:16px 0;border-top:1px solid var(--linha)}
-.linha .h{font-variant-numeric:tabular-nums;color:var(--tinta-2);font-size:15px;padding-top:2px}
-.linha h3{font-size:18px;margin-bottom:3px}
-.linha p{margin:0;font-size:15.5px;color:var(--tinta-2);max-width:70ch}
-.linha.pausa{padding:9px 0}.linha.pausa h3{font-weight:400;color:var(--tinta-2);font-size:15px}
-.linha.destaque h3{color:var(--foto)}
-.nota-grade{margin-top:28px;font-size:15px;color:var(--tinta-2);max-width:72ch}
-.origem{margin-top:48px;padding:28px 32px;border-left:4px solid var(--monitor);background:var(--acrilico);border-radius:0 var(--raio-p) var(--raio-p) 0;max-width:780px}
-.origem p{margin:0;font-size:17px}
-@media (max-width:600px){.linha{grid-template-columns:1fr;gap:2px}}
+.numeros b{display:block;font-family:var(--serif);font-weight:400;font-size:64px;line-height:.95;color:var(--tinta);letter-spacing:-.02em}
+.dias{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:72px}
+.dia h3{font-size:15px;font-weight:600;color:var(--tinta-2);padding-bottom:16px;border-bottom:1px solid var(--tinta);display:flex;justify-content:space-between}
+.dia h3 span{font-weight:400}
+.item{display:grid;grid-template-columns:76px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid var(--linha)}
+.item .h{font-family:var(--serif);font-size:22px;line-height:1.1;color:var(--tinta-2)}
+.item h4{margin:0 0 4px;font-size:17.5px;font-weight:600;letter-spacing:-.01em}
+.item p{margin:0;font-size:15px;color:var(--tinta-2);line-height:1.55}
+.item.pausa{padding:10px 0}.item.pausa h4{font-weight:400;color:var(--tinta-2);font-size:15px;margin:0}
+.item.pausa .h{font-size:17px}
+.item.ouro h4{color:var(--foto)}
+.item.ouro .h{color:var(--foto)}
+.rodape-grade{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:64px;align-items:start}
+.rodape-grade p{font-size:15px;color:var(--tinta-2);margin:0}
+.citacao{font-family:var(--serif);font-size:clamp(22px,2.2vw,28px);line-height:1.3;color:var(--tinta);margin:0;padding-left:24px;border-left:2px solid var(--monitor)}
+@media (max-width:860px){.dias,.rodape-grade{grid-template-columns:1fr;gap:40px}}
 
-/* CALCULADORA */
-.calc-sec{background:var(--noite);color:#E9F1F6}
-.calc-sec .lead{color:#B8C8DA}
-.calc{display:grid;grid-template-columns:minmax(260px,380px) 1fr;gap:28px;margin-top:48px}
-.painel{background:var(--noite-2);border:1px solid #2C416A;border-radius:var(--raio-g);padding:28px}
-.campo{margin-bottom:22px}
-.campo label{display:flex;justify-content:space-between;font-size:15px;color:#B8C8DA;margin-bottom:8px}
-.campo label output{color:#fff;font-weight:600;font-variant-numeric:tabular-nums}
-input[type=range]{width:100%;accent-color:var(--monitor)}
-.campo .num{width:100%;background:#0F1A30;border:1px solid #2C416A;color:#fff;border-radius:8px;padding:10px 12px;font:500 17px "IBM Plex Sans",sans-serif}
-.resultado{display:flex;flex-direction:column;gap:18px}
-.tig{background:var(--noite-2);border:1px solid #2C416A;border-radius:var(--raio-g);padding:28px 30px}
-.tig .valor{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(56px,8vw,88px);font-weight:800;line-height:1;color:var(--monitor);font-variant-numeric:tabular-nums}
-.tig .unid{font-size:17px;color:#B8C8DA;margin-top:6px}
-.passos{background:#0F1A30;border:1px dashed #33486E;border-radius:var(--raio-g);padding:24px 30px}
-.passos h3{font-size:16px;color:#B8C8DA;font-weight:500;margin-bottom:12px}
-.passos ol{margin:0;padding-left:20px;font-variant-numeric:tabular-nums}
-.passos li{margin:6px 0;color:#E9F1F6}
-.passos .f{color:var(--ambar)}
-.aviso{font-size:13.5px;color:#7F96B2;margin-top:18px}
-@media (max-width:820px){.calc{grid-template-columns:1fr}}
+/* calculadora */
+.calc{display:grid;grid-template-columns:minmax(260px,400px) 1fr;gap:24px;margin-top:64px}
+.painel,.visor,.conta{border:1px solid var(--linha-escura);border-radius:20px;background:linear-gradient(180deg,var(--noite-2),#111D38)}
+.painel{padding:30px}
+.campo+.campo{margin-top:28px}
+.campo label{display:flex;justify-content:space-between;font-size:14.5px;color:#9FB3CB;margin-bottom:12px}
+.campo output{color:#fff;font-weight:600;font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--monitor) var(--p,50%),#2A3B61 var(--p,50%));outline-offset:8px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:4px solid var(--monitor);cursor:grab}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#fff;border:4px solid var(--monitor);cursor:grab}
+.lado-dir{display:grid;grid-template-rows:auto auto;gap:24px}
+.visor{padding:28px 32px 18px;position:relative;overflow:hidden}
+.visor .rot{font-size:13.5px;color:#9FB3CB;display:flex;justify-content:space-between}
+.visor .rot i{font-style:normal;color:var(--monitor);display:flex;gap:6px;align-items:center}
+.visor .rot i::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--monitor);animation:pisca 1.4s infinite}
+@keyframes pisca{50%{opacity:.25}}
+.visor .valor{font-family:var(--serif);font-size:clamp(84px,10vw,132px);line-height:.95;color:#fff;font-variant-numeric:tabular-nums;margin-top:8px}
+.visor .unid{color:#9FB3CB;font-size:16px}
+#traco{display:block;width:100%;height:56px;margin-top:12px}
+.conta{padding:24px 32px;border-style:dashed}
+.conta h3{font-size:14px;font-weight:500;color:#9FB3CB;margin-bottom:12px}
+.conta ol{margin:0;padding-left:22px;font-variant-numeric:tabular-nums;font-size:15.5px}
+.conta li{margin:7px 0;color:#DCE6F0}
+.conta li b{color:#fff}
+.conta .atalho{color:var(--ambar)}
+.aviso{font-size:13.5px;color:#7C91AB;margin-top:22px}
+@media (max-width:860px){.calc{grid-template-columns:1fr}}
 
-/* CONTRARIO */
-.controv{margin-top:48px;display:grid;gap:14px}
-.cv{background:var(--papel);border-radius:var(--raio-g);padding:24px 28px;display:grid;grid-template-columns:1fr auto;gap:12px 24px;align-items:center;border:1px solid var(--linha)}
-.cv h3{font-size:19px}
-.cv .ev{font-size:14.5px;color:var(--tinta-2);grid-column:1}
-.cv button{grid-row:1/3;grid-column:2;border:1.5px solid var(--foto);background:transparent;color:var(--foto);font:600 15px "IBM Plex Sans",sans-serif;padding:11px 18px;border-radius:999px;cursor:pointer;white-space:nowrap}
-.cv button[aria-expanded="true"]{background:var(--foto);color:#fff}
-.lados{grid-column:1/-1;display:none;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
-.cv.aberto .lados{display:grid}
-.lado{padding:16px 18px;border-radius:var(--raio-p);font-size:15.5px}
-.lado b{display:block;font-size:13.5px;font-weight:600;margin-bottom:4px}
-.lado.eu{background:var(--acrilico)}
-.lado.ia{background:#EAEEFE;border-left:3px solid var(--foto)}
-.veredictos{margin-top:30px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:15px;color:var(--tinta-2)}
-.veredictos span{background:var(--papel);border:1px solid var(--linha);border-radius:999px;padding:6px 14px;color:var(--tinta)}
-@media (max-width:640px){.cv{grid-template-columns:1fr}.cv button{grid-row:auto;grid-column:1;justify-self:start}.lados{grid-template-columns:1fr}}
+/* contrario */
+.contrario{background:var(--papel)}
+.cvs{margin-top:64px;border-top:1px solid var(--tinta)}
+.cv{border-bottom:1px solid var(--linha)}
+.cv button{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:center;padding:26px 0}
+.cv .i{font-family:var(--serif);font-size:26px;color:var(--tinta-2)}
+.cv h3{font-size:clamp(20px,2vw,26px);font-weight:500}
+.cv .ev{font-size:14px;color:var(--tinta-2);margin-top:4px;display:block}
+.cv .acao{font-size:14px;font-weight:600;color:var(--foto);border:1px solid currentColor;border-radius:999px;padding:9px 16px;white-space:nowrap}
+.cv[data-aberto] .acao{background:var(--foto);color:#fff;border-color:var(--foto)}
+.lados{display:grid;grid-template-columns:1fr 1fr;gap:0;max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.2,.7,.2,1);margin-left:68px}
+.cv[data-aberto] .lados{max-height:240px}
+.lado{padding:6px 28px 30px 0;font-size:clamp(20px,1.9vw,24px);font-family:var(--serif);line-height:1.2}
+.lado small{display:block;font-family:var(--sans);font-size:13.5px;color:var(--tinta-2);margin-bottom:8px}
+.lado.ia{padding-left:28px;border-left:2px solid var(--foto);color:var(--foto)}
+.veredictos{margin-top:40px;display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center;font-size:15px;color:var(--tinta-2)}
+.veredictos span{border:1px solid var(--linha);border-radius:999px;padding:7px 16px;color:var(--tinta);background:#fff}
+@media (max-width:640px){.cv button{grid-template-columns:32px 1fr}.cv .acao{grid-column:2;justify-self:start}.lados{grid-template-columns:1fr;margin-left:52px}.lado.ia{padding-left:16px}.cv[data-aberto] .lados{max-height:400px}}
 
-/* SERIE */
-.serie-sec{background:var(--papel)}
-.barra{display:flex;height:58px;border-radius:14px;overflow:hidden;margin:48px 0 10px}
-.barra div{display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#fff;overflow:hidden;white-space:nowrap;padding:0 4px}
-.legenda-barra{display:flex;justify-content:space-between;font-size:13px;color:var(--tinta-2);font-variant-numeric:tabular-nums}
-.chaves{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:18px;font-size:14.5px;color:var(--tinta-2)}
-.chaves i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:7px;vertical-align:-1px}
-.aulas{margin-top:56px;border-top:1px solid var(--linha)}
-.aula{border-bottom:1px solid var(--linha)}
-.aula summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:56px 1fr auto;gap:16px;align-items:center;padding:22px 0}
-.aula summary::-webkit-details-marker{display:none}
-.aula .n{font-family:"Bricolage Grotesque",sans-serif;font-size:34px;font-weight:800;color:var(--foto)}
-.aula summary h3{font-size:20px}
-.aula summary .g{font-size:14.5px;color:var(--tinta-2);margin-top:3px}
-.aula summary .mais{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--linha);display:grid;place-items:center;font-size:20px;color:var(--tinta-2);transition:transform .2s}
-.aula[open] summary .mais{transform:rotate(45deg)}
-.atos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:0 0 18px 72px}
-.ato{background:var(--acrilico);border-radius:var(--raio-p);padding:16px 18px;font-size:15.5px}
-.ato b{display:block;font-size:13.5px;color:var(--tinta-2);font-weight:600;margin-bottom:4px}
-.etica{margin:0 0 26px 72px;padding:16px 20px;border-radius:var(--raio-p);background:#FFF4E3;border-left:3px solid var(--ambar);font-size:16px}
-.etica b{font-weight:600}
-@media (max-width:760px){.atos{grid-template-columns:1fr;padding-left:0}.etica{margin-left:0}.aula summary{grid-template-columns:40px 1fr auto}}
+/* serie */
+.serie{background:var(--acrilico)}
+.tempo{margin-top:72px}
+.barra{display:flex;height:72px;border-radius:16px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(14,24,48,.45)}
+.barra div{display:flex;align-items:flex-end;padding:10px 12px;font-size:13px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden}
+.marcas{display:flex;justify-content:space-between;font-size:13px;color:var(--tinta-2);margin-top:10px;font-variant-numeric:tabular-nums}
+.chaves{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:22px;font-size:14.5px;color:var(--tinta-2)}
+.chaves i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+.aulas{margin-top:80px;border-top:1px solid var(--tinta)}
+details.aula{border-bottom:1px solid var(--linha)}
+details.aula summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:72px 1fr 40px;gap:20px;align-items:center;padding:28px 0}
+details.aula summary::-webkit-details-marker{display:none}
+.aula .n{font-family:var(--serif);font-size:48px;line-height:1;color:var(--foto)}
+.aula summary h3{font-size:clamp(20px,2.1vw,27px);font-weight:500}
+.aula summary .g{font-size:14.5px;color:var(--tinta-2);margin-top:6px}
+.aula .mais{width:40px;height:40px;border-radius:50%;border:1px solid var(--linha);display:grid;place-items:center;transition:transform .3s,background .3s}
+.aula .mais::before{content:"";width:12px;height:12px;background:linear-gradient(var(--tinta),var(--tinta)) center/100% 1.5px no-repeat,linear-gradient(var(--tinta),var(--tinta)) center/1.5px 100% no-repeat}
+details.aula[open] .mais{transform:rotate(45deg);background:#fff}
+.atos{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linha);border:1px solid var(--linha);border-radius:14px;overflow:hidden;margin:0 0 18px 92px}
+.ato{background:#fff;padding:20px 22px;font-size:15.5px}
+.ato b{display:block;font-family:var(--serif);font-weight:400;font-size:18px;color:var(--tinta-2);margin-bottom:6px}
+.etica{margin:0 0 32px 92px;display:flex;gap:16px;align-items:flex-start;font-family:var(--serif);font-size:clamp(20px,1.9vw,24px);line-height:1.25}
+.etica small{font-family:var(--sans);font-size:13px;color:#A86A15;background:#FDF0DA;border-radius:999px;padding:4px 12px;white-space:nowrap;margin-top:3px}
+.fecho{margin-top:40px;font-size:15.5px;color:var(--tinta-2);max-width:62ch}
+@media (max-width:760px){.atos{grid-template-columns:1fr;margin-left:0}.etica{margin-left:0;flex-direction:column;gap:8px}details.aula summary{grid-template-columns:48px 1fr 40px}}
 
-/* SITUA */
-.situa{display:grid;grid-template-columns:1fr 1fr;margin-top:48px;border-radius:var(--raio-g);overflow:hidden;border:1px solid var(--linha)}
-.situa div{padding:14px 24px;font-size:15.5px;border-top:1px solid var(--linha)}
-.situa .c1{background:var(--papel);color:var(--tinta-2)}
-.situa .c2{background:#F3F6FF}
-.situa .t{border-top:0;font-weight:600;font-size:15px;color:var(--tinta)}
-.situa .t.c2{background:var(--foto);color:#fff}
-@media (max-width:640px){.situa{grid-template-columns:1fr}.situa .c1{border-bottom:0;padding-bottom:4px;font-size:14px}.situa .c1.t{display:none}.situa .c2{border-top:0}}
+/* situa */
+.situa{background:var(--papel)}
+.comp{margin-top:64px;display:grid;grid-template-columns:1fr 1.25fr}
+.comp > div{padding:18px 0;border-bottom:1px solid var(--linha);font-size:16px}
+.comp .a{color:var(--tinta-2);padding-right:32px}
+.comp .b{padding-left:32px;border-left:2px solid var(--foto)}
+.comp .t{font-size:13.5px;color:var(--tinta-2);border-bottom:1px solid var(--tinta);padding-bottom:12px}
+.comp .t.b{color:var(--foto);font-weight:600}
+@media (max-width:680px){.comp{grid-template-columns:1fr}.comp .a{border-bottom:0;padding:16px 0 2px;font-size:14px}.comp .b{padding-left:16px}.comp .t.a{display:none}}
 
-/* INVEST */
-.invest-sec{background:var(--papel)}
-.opcoes{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px}
-.op{border-radius:var(--raio-g);padding:32px;border:1.5px solid var(--linha)}
-.op.b{border-color:var(--foto);background:#F6F8FF}
-.op .q{font-size:15px;color:var(--tinta-2);min-height:48px}
-.op .preco{font-family:"Bricolage Grotesque",sans-serif;font-size:46px;font-weight:800;margin:14px 0 4px}
-.op .por{font-size:14.5px;color:var(--tinta-2)}
-.op h3{font-size:22px}
-.inclui{margin-top:34px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 28px;padding:0;list-style:none}
-.inclui li{padding-left:26px;position:relative;font-size:15.5px}
-.inclui li::before{content:"";position:absolute;left:0;top:8px;width:13px;height:7px;border-left:2.5px solid var(--monitor);border-bottom:2.5px solid var(--monitor);transform:rotate(-45deg)}
-.miudo{font-size:15px;color:var(--tinta-2);margin-top:26px;max-width:75ch}
-@media (max-width:700px){.opcoes{grid-template-columns:1fr}}
+/* investimento */
+.invest{background:var(--noite);color:#E8EFF6}
+.opcoes{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:64px}
+.op{border-radius:22px;padding:36px;border:1px solid var(--linha-escura);background:linear-gradient(180deg,var(--noite-2),#111D38);position:relative;overflow:hidden}
+.op.b{border-color:rgba(91,124,250,.6);box-shadow:0 0 0 1px rgba(91,124,250,.25),0 40px 80px -40px rgba(91,124,250,.55)}
+.op h3{font-size:15px;font-weight:600;color:#9FB3CB}
+.op .preco{font-family:var(--serif);font-size:clamp(56px,6vw,80px);line-height:1;margin:22px 0 6px;color:#fff;letter-spacing:-.02em}
+.op .por{font-size:14px;color:#8EA3BD}
+.op p{margin:22px 0 0;font-size:15.5px;color:#C3D1E0;max-width:36ch}
+.inclui{list-style:none;padding:0;margin:48px 0 0;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--linha-escura)}
+.inclui li{padding:20px 18px 0 0;font-size:15px;color:#DCE6F0}
+.inclui li::before{content:"";display:block;width:18px;height:18px;border-radius:50%;margin-bottom:12px;background:radial-gradient(circle,var(--monitor) 35%,transparent 38%),rgba(46,196,182,.15)}
+.miudo{font-size:14.5px;color:#8EA3BD;margin-top:40px;max-width:80ch}
+.miudo+.miudo{margin-top:12px}
+@media (max-width:900px){.inclui{grid-template-columns:1fr 1fr;gap:0 18px}}
+@media (max-width:640px){.opcoes{grid-template-columns:1fr}}
 
-/* BIO */
-.bio{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:56px;margin-top:40px;align-items:start}
-.bio .frase{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(28px,3.4vw,40px);line-height:1.12;font-weight:600;letter-spacing:-.02em}
-.bio .fato{font-family:"Bricolage Grotesque",sans-serif;font-size:52px;font-weight:800;color:var(--foto);line-height:1;margin-top:34px}
-.bio .fato small{display:block;font-family:"IBM Plex Sans",sans-serif;font-size:15px;font-weight:400;color:var(--tinta-2);margin-top:8px;line-height:1.4}
-.bio-texto p{font-size:16.5px}
-@media (max-width:820px){.bio{grid-template-columns:1fr;gap:28px}}
+/* instrutor */
+.instrutor{background:var(--papel)}
+.bio{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px;margin-top:64px;align-items:start}
+.retrato{position:sticky;top:96px;margin:0;border-radius:24px;overflow:hidden;aspect-ratio:4/5;background:var(--noite);box-shadow:0 50px 90px -50px rgba(14,24,48,.6)}
+.retrato img{width:100%;height:100%;object-fit:cover;display:block}
+.retrato figcaption{position:absolute;left:0;right:0;bottom:0;padding:60px 26px 22px;background:linear-gradient(180deg,rgba(14,24,48,0),rgba(14,24,48,.85));color:#E8EFF6;font-size:14px;display:flex;justify-content:space-between;gap:12px}
+.retrato figcaption b{font-weight:600}
+.bio-texto{margin-top:40px}
+.bio .frase{font-family:var(--serif);font-size:clamp(36px,4.2vw,58px);line-height:1.04;letter-spacing:-.015em;margin:0}
+.fato{margin-top:52px;padding-top:28px;border-top:1px solid var(--linha);display:flex;gap:26px;align-items:baseline;flex-wrap:wrap}
+.fato .v{font-family:var(--serif);font-size:clamp(52px,5vw,72px);line-height:1;color:var(--foto);white-space:nowrap}
+.fato .v s{text-decoration:none;color:var(--linha)}
+.fato small{font-size:14.5px;color:var(--tinta-2);max-width:30ch;line-height:1.45}
+.bio-texto p{font-size:16.5px;color:#2C3846}
+.bio-texto p:last-child{font-family:var(--serif);font-size:24px;line-height:1.25;color:var(--tinta);margin-top:28px}
+@media (max-width:860px){.bio{grid-template-columns:1fr;gap:40px}.retrato{position:relative;top:0;max-width:440px}}
 
-/* FIM */
-.fim{background:var(--noite);color:#E9F1F6}
-.passos-fim{counter-reset:p;list-style:none;padding:0;margin:40px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
-.passos-fim li{counter-increment:p;border-top:2px solid #33486E;padding-top:14px;font-size:16px;color:#C8D6E4}
-.passos-fim li::before{content:counter(p);display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:28px;font-weight:800;color:var(--monitor);margin-bottom:6px}
-.assin{margin-top:72px;padding-top:26px;border-top:1px solid #2C416A;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:14px;color:#8FA4BD}
-.assin a{color:#E9F1F6}
+/* proximos */
+.fim{background:var(--noite);color:#E8EFF6}
+.passos{list-style:none;padding:0;margin:64px 0 0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--linha-escura)}
+.passos li{padding:28px 28px 28px 0;border-bottom:1px solid var(--linha-escura);font-size:17px;color:#DCE6F0;display:flex;gap:18px}
+.passos li b{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1;color:var(--monitor);min-width:28px}
+.assinatura{margin-top:110px;display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.assinatura .grande{font-size:clamp(48px,8vw,112px);font-weight:600;letter-spacing:-.05em;line-height:.9}
+.assinatura .grande em{font-family:var(--serif);font-weight:400;color:var(--monitor);letter-spacing:-.02em}
+.assinatura .dir{font-size:14px;color:#8EA3BD;text-align:right}
+.assinatura .dir a{color:#fff}
+@media (max-width:860px){.passos{grid-template-columns:1fr}}
+
+/* impressão */
+@media print{
+  .topo,#cena,.hero::after{display:none!important}
+  body{background:#fff}
+  .hero,.escuro,.invest,.fim{background:#fff!important;color:#000!important}
+  .hero{min-height:auto;padding-top:40px}
+  .lados{max-height:none!important}.cv .acao{display:none}
+  details.aula>*{display:block}
+  section{padding:40px 0;break-inside:avoid-page}
+  .entrada{opacity:1;transform:none;animation:none}
+}
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <canvas id="cena" aria-hidden="true"></canvas>
+<header class="topo" id="topo">
   <div class="wrap">
-    <div class="hero-top"><span>Proposta para a Nestlé</span><span>INOVAMED</span><span>Outubro de 2026</span></div>
-    <h1>AIMED Neonatal<small>Inteligência artificial construída pelo próprio neonatologista</small></h1>
-    <p>Uma imersão presencial para até 15 neonatologistas, o acompanhamento online da turma e uma série nacional de cinco aulas. Na imersão, cada participante sai com ferramentas que ele mesmo construiu, já funcionando.</p>
+    <a class="marca" href="#inicio"><i aria-hidden="true"></i>INOVAMED</a>
+    <nav aria-label="Seções">
+      <a href="#jornada">Programa</a>
+      <a href="#imersao">Imersão</a>
+      <a href="#experimente">Experimente</a>
+      <a href="#serie">Série nacional</a>
+      <a href="#investimento">Investimento</a>
+      <a href="#instrutor">Instrutor</a>
+    </nav>
   </div>
-  <div class="hero-legenda">Curvas de crescimento neonatal em 3D, desenhadas em código. Arraste para girar.</div>
+  <div class="progresso" id="progresso"></div>
 </header>
 
-<main>
-
-<section id="frentes">
+<section class="hero" id="inicio">
+  <canvas id="cena" aria-hidden="true"></canvas>
   <div class="wrap">
-    <h2>Uma jornada em quatro momentos</h2>
-    <p class="lead">A mesma metodologia (AIMED) e o mesmo repertório de casos neonatais atravessam as três frentes do programa. Se a série acontecer antes da imersão, a turma presencial chega conhecendo os debates.</p>
-    <div class="jornada">
-      <div class="etapa"><div class="ponto">1</div><div class="quando">Brasil inteiro</div><h3>Série nacional</h3><p>Cinco aulas ao vivo de 60 minutos, assistidas em grupo em várias cidades. Todas gravadas.</p></div>
-      <div class="etapa"><div class="ponto">2</div><div class="quando">De 7 a 3 dias antes</div><h3>Preparação</h3><p>Sessão online de 45 minutos: contas criadas, ambiente testado e o problema de cada um definido.</p></div>
-      <div class="etapa forte"><div class="ponto">3</div><div class="quando">1,5 dia presencial</div><h3>Imersão</h3><p>Até 15 neonatologistas, cada um no próprio notebook, com mentoria em trios.</p></div>
-      <div class="etapa"><div class="ponto">4</div><div class="quando">60 dias depois</div><h3>Demo Day</h3><p>Cada participante mostra a ferramenta funcionando na própria unidade, como apoio e com conferência do médico.</p></div>
+    <div class="selo entrada"><span class="pt"></span>Proposta para a Nestlé</div>
+    <h1 class="entrada e2">AIMED<span class="linha2">Neonatal</span></h1>
+    <div class="hero-rodape entrada e3">
+      <p>Inteligência artificial construída pelo próprio neonatologista. Uma imersão presencial, o acompanhamento da turma e uma série nacional de cinco aulas.</p>
+      <div class="hero-meta"><span>Preparada por</span><b>INOVAMED</b><span>Data</span><b>Outubro de 2026</b><span>Válida até</span><b>20 de novembro de 2026</b></div>
     </div>
   </div>
 </section>
 
-<section class="grade-sec" id="imersao">
+<section class="manifesto">
   <div class="wrap">
+    <p>Na imersão, cada neonatologista sai com ferramentas que ele mesmo construiu, <span>já funcionando na própria UTIN.</span></p>
+  </div>
+</section>
+
+<section class="jornada-sec" id="jornada">
+  <div class="wrap">
+    <div class="cap"><b>I</b>O programa<span></span></div>
+    <h2>Uma jornada em <em>quatro momentos</em></h2>
+    <p class="lead">A mesma metodologia (AIMED) e o mesmo repertório de casos neonatais atravessam as três frentes. Se a série acontecer antes da imersão, a turma presencial chega conhecendo os debates.</p>
+    <div class="jornada">
+      <div class="etapa"><div class="num">1</div><div class="quando">Brasil inteiro</div><h3>Série nacional</h3><p>Cinco aulas ao vivo de 60 minutos, assistidas em grupo em várias cidades. Todas gravadas.</p></div>
+      <div class="etapa"><div class="num">2</div><div class="quando">De 7 a 3 dias antes</div><h3>Preparação</h3><p>Sessão online de 45 minutos: contas criadas, ambiente testado e o problema de cada um definido.</p></div>
+      <div class="etapa foco"><div class="num">3</div><div class="quando">1,5 dia presencial</div><h3>Imersão</h3><p>Até 15 neonatologistas, cada um no próprio notebook, com mentoria em trios.</p></div>
+      <div class="etapa"><div class="num">4</div><div class="quando">60 dias depois</div><h3>Demo Day</h3><p>Cada participante mostra a ferramenta funcionando na própria unidade, como apoio e com conferência do médico.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="grade" id="imersao">
+  <div class="wrap">
+    <div class="cap"><b>II</b>A imersão<span></span></div>
     <div class="cabeca">
-      <h2>A imersão, hora a hora</h2>
+      <h2>Um dia e meio, <em>hora a hora</em></h2>
       <div class="numeros"><div><b>12h30</b>presenciais</div><div><b>13h</b>no certificado</div><div><b>15</b>participantes</div></div>
     </div>
-
-    <div class="abas" role="tablist" aria-label="Dias da imersão">
-      <button role="tab" aria-selected="true" aria-controls="d1" id="t1">Dia 1</button>
-      <button role="tab" aria-selected="false" aria-controls="d2" id="t2" tabindex="-1">Dia 2</button>
+    <div class="dias">
+      <div class="dia">
+        <h3>Dia 1 <span>8h00 às 17h30</span></h3>
+        <div class="item"><div class="h">8h00</div><div><h4>Abertura</h4><p>Apresentação dos participantes e do problema que cada um trouxe para resolver.</p></div></div>
+        <div class="item"><div class="h">8h20</div><div><h4>Metodologia AIMED</h4><p>Os cinco componentes do pedido clínico (Assistente, Informação, Missão, Estrutura, Diretrizes), com um caso de prematuro de 28 semanas em três níveis de profundidade.</p></div></div>
+        <div class="item"><div class="h">9h20</div><div><h4>Perfil Clínico Permanente</h4><p>Cada participante configura a IA uma única vez como neonatologista do seu tipo de unidade.</p></div></div>
+        <div class="item"><div class="h">9h40</div><div><h4>Teoria do Contrário: plantando</h4><p>Cada trio recebe uma controvérsia e escreve o prompt que manda a IA defender o lado oposto. A discussão só volta no dia seguinte.</p></div></div>
+        <div class="item pausa"><div class="h">10h00</div><div><h4>Café</h4></div></div>
+        <div class="item"><div class="h">10h15</div><div><h4>A voz como ferramenta clínica</h4><p>Evolução ditada no round e passagem de plantão estruturada a partir da fala.</p></div></div>
+        <div class="item"><div class="h">11h00</div><div><h4>MAPA: qual solução escolher</h4><p>Quando basta um pedido, quando vale uma Skill, um projeto ou um agente.</p></div></div>
+        <div class="item pausa"><div class="h">12h00</div><div><h4>Almoço livre</h4></div></div>
+        <div class="item ouro"><div class="h">13h30</div><div><h4>Laboratório de cálculos neonatais</h4><p>Cálculos da UTIN transformados em Skills reutilizáveis, e uma ferramenta completa construída ao vivo: o limiar de fototerapia pelo nomograma AAP 2022.</p></div></div>
+        <div class="item pausa"><div class="h">15h30</div><div><h4>Café</h4></div></div>
+        <div class="item"><div class="h">15h45</div><div><h4>Artefatos 3D</h4><p>O trajeto do cateter umbilical em três dimensões, acoplado ao cálculo da profundidade de inserção.</p></div></div>
+        <div class="item"><div class="h">16h30</div><div><h4>Mentoria em trios, 1ª rodada</h4><p>Cada participante começa a ferramenta do próprio caso.</p></div></div>
+      </div>
+      <div class="dia">
+        <h3>Dia 2 <span>8h00 às 12h30</span></h3>
+        <div class="item"><div class="h">8h00</div><div><h4>Da dúvida à evidência</h4><p>A dúvida da controvérsia vira pergunta pesquisável (PICO) e busca real. Os ensaios vão para o Gemini Notebook, que responde citando o trecho de cada fonte.</p></div></div>
+        <div class="item"><div class="h">8h45</div><div><h4>Do prompt ao agente</h4><p>Cowork, ChatGPT Work e Gemini Spark: o que faz uma ferramenta agir sozinha e quando isso é seguro. Caso real: um sistema de gestão de leitos neonatais em funcionamento.</p></div></div>
+        <div class="item"><div class="h">9h30</div><div><h4>Ética médica e IA</h4><p>Resolução CFM nº 2.454/2026: registro em prontuário, informação aos pais, responsabilidade, LGPD. Com um exercício em duplas de comunicação com os pais à beira da incubadora.</p></div></div>
+        <div class="item pausa"><div class="h">10h15</div><div><h4>Café</h4></div></div>
+        <div class="item"><div class="h">10h30</div><div><h4>Mentoria em trios, 2ª rodada</h4><p>Finalização e teste de cada ferramenta.</p></div></div>
+        <div class="item"><div class="h">11h30</div><div><h4>Teoria do Contrário: colhendo</h4><p>Cada trio apresenta o veredicto sobre a sua controvérsia.</p></div></div>
+        <div class="item ouro"><div class="h">12h00</div><div><h4>Apresentações e encerramento</h4><p>Cada participante mostra a própria ferramenta funcionando, em até 2 minutos, e sai com o plano dos próximos 7 dias.</p></div></div>
+      </div>
     </div>
-
-    <div class="dia ativo" id="d1" role="tabpanel" aria-labelledby="t1">
-      <div class="linha"><div class="h">8h00</div><div><h3>Abertura</h3><p>Apresentação dos participantes e do problema que cada um trouxe para resolver.</p></div></div>
-      <div class="linha"><div class="h">8h20</div><div><h3>Metodologia AIMED</h3><p>Os cinco componentes do pedido clínico (Assistente, Informação, Missão, Estrutura, Diretrizes), com um caso de prematuro de 28 semanas em três níveis de profundidade.</p></div></div>
-      <div class="linha"><div class="h">9h20</div><div><h3>Perfil Clínico Permanente</h3><p>Cada participante configura a IA uma única vez como neonatologista do seu tipo de unidade.</p></div></div>
-      <div class="linha"><div class="h">9h40</div><div><h3>Teoria do Contrário: plantando</h3><p>Cada trio recebe uma controvérsia neonatal e escreve o prompt que manda a IA defender o lado oposto. A discussão só é retomada no dia seguinte.</p></div></div>
-      <div class="linha pausa"><div class="h">10h00</div><div><h3>Café</h3></div></div>
-      <div class="linha"><div class="h">10h15</div><div><h3>A voz como ferramenta clínica</h3><p>Evolução ditada no round e passagem de plantão estruturada a partir da fala.</p></div></div>
-      <div class="linha"><div class="h">11h00</div><div><h3>MAPA: qual solução escolher</h3><p>Quando basta um pedido, quando vale uma instrução reutilizável (Skill), um projeto ou um agente.</p></div></div>
-      <div class="linha pausa"><div class="h">12h00</div><div><h3>Almoço livre</h3></div></div>
-      <div class="linha destaque"><div class="h">13h30</div><div><h3>Laboratório de cálculos neonatais</h3><p>Cálculos da UTIN transformados em Skills reutilizáveis, e uma ferramenta completa construída ao vivo: o limiar de fototerapia pelo nomograma AAP 2022.</p></div></div>
-      <div class="linha pausa"><div class="h">15h30</div><div><h3>Café</h3></div></div>
-      <div class="linha"><div class="h">15h45</div><div><h3>Artefatos 3D</h3><p>Modelo tridimensional do trajeto do cateter umbilical, acoplado ao cálculo da profundidade de inserção.</p></div></div>
-      <div class="linha"><div class="h">16h30</div><div><h3>Mentoria em trios, 1ª rodada</h3><p>Cada participante começa a ferramenta do próprio caso.</p></div></div>
+    <div class="rodape-grade">
+      <p class="citacao">O formato vem da turma de Goiânia, em setembro de 2026. O que funcionou melhor foi cada participante chegar com a própria dor para resolver: o balanço hídrico refeito a cada plantão, o escore z de um ecocardiograma, o laudo que se repete toda semana.</p>
+      <p>Ferramentas usadas: ChatGPT, Claude, Gemini e Gemini Notebook (antigo NotebookLM). Quando existe versão gratuita, ela aparece primeiro.<br><br>As ferramentas de IA mudam rápido. O programa pode ser atualizado até a data do evento, sem alterar carga horária nem objetivos.</p>
     </div>
-
-    <div class="dia" id="d2" role="tabpanel" aria-labelledby="t2">
-      <div class="linha"><div class="h">8h00</div><div><h3>Da dúvida à evidência: PICO e Gemini Notebook</h3><p>A dúvida da controvérsia vira pergunta pesquisável e busca real. Os ensaios encontrados vão para o Gemini Notebook, que responde citando o trecho de cada fonte.</p></div></div>
-      <div class="linha"><div class="h">8h45</div><div><h3>Do prompt ao agente</h3><p>Cowork, ChatGPT Work e Gemini Spark: o que faz uma ferramenta agir sozinha e quando isso é seguro. Caso real: um sistema de gestão de leitos neonatais em funcionamento.</p></div></div>
-      <div class="linha"><div class="h">9h30</div><div><h3>Ética médica e IA</h3><p>Resolução CFM nº 2.454/2026: registro em prontuário, informação aos pais, responsabilidade, LGPD. Inclui um exercício em duplas de comunicação com os pais à beira da incubadora.</p></div></div>
-      <div class="linha pausa"><div class="h">10h15</div><div><h3>Café</h3></div></div>
-      <div class="linha"><div class="h">10h30</div><div><h3>Mentoria em trios, 2ª rodada</h3><p>Finalização e teste de cada ferramenta.</p></div></div>
-      <div class="linha"><div class="h">11h30</div><div><h3>Teoria do Contrário: colhendo</h3><p>Cada trio apresenta o veredicto sobre a sua controvérsia.</p></div></div>
-      <div class="linha"><div class="h">12h00</div><div><h3>Apresentações e encerramento</h3><p>Cada participante mostra a própria ferramenta funcionando, em até 2 minutos, e sai com o plano dos próximos 7 dias.</p></div></div>
-    </div>
-
-    <p class="nota-grade">Ferramentas usadas: ChatGPT, Claude, Gemini e Gemini Notebook (antigo NotebookLM). Quando existe versão gratuita, ela aparece primeiro. As ferramentas de IA mudam rápido, e o programa pode ser atualizado até a data do evento, sem alterar carga horária nem objetivos.</p>
-
-    <div class="origem"><p>O formato vem da turma de Goiânia, em setembro de 2026. Lá, o que funcionou melhor foi cada participante chegar com a própria dor para resolver: o balanço hídrico refeito a cada plantão, o escore z de um ecocardiograma, o laudo que se repete toda semana. Ninguém saiu com exercício genérico.</p></div>
   </div>
 </section>
 
-<section class="calc-sec" id="experimente">
+<section class="escuro" id="experimente">
   <div class="wrap">
-    <h2>Experimente: o tipo de ferramenta que sai do curso</h2>
-    <p class="lead">Esta calculadora de taxa de infusão de glicose foi construída com o mesmo método ensinado no laboratório. Mexa nos valores. O resultado vem sempre acompanhado da conta, para que o médico confira antes de usar.</p>
+    <div class="cap"><b>III</b>Experimente<span></span></div>
+    <h2>O tipo de ferramenta <em>que sai do curso</em></h2>
+    <p class="lead">Esta calculadora de taxa de infusão de glicose foi construída com o método ensinado no laboratório. Mexa nos valores: o resultado vem sempre com a conta, para o médico conferir antes de usar.</p>
     <div class="calc">
       <div class="painel">
-        <div class="campo"><label for="peso">Peso <output id="o-peso">1,20 kg</output></label><input id="peso" type="range" min="0.4" max="4.5" step="0.01" value="1.2"></div>
-        <div class="campo"><label for="vol">Volume de soro <output id="o-vol">100 mL/kg/dia</output></label><input id="vol" type="range" min="40" max="180" step="5" value="100"></div>
-        <div class="campo"><label for="glic">Concentração de glicose <output id="o-glic">10%</output></label><input id="glic" type="range" min="5" max="25" step="0.5" value="10"></div>
+        <div class="campo"><label for="peso">Peso <output id="o-peso"></output></label><input id="peso" type="range" min="0.4" max="4.5" step="0.01" value="1.2"></div>
+        <div class="campo"><label for="vol">Volume de soro <output id="o-vol"></output></label><input id="vol" type="range" min="40" max="180" step="5" value="100"></div>
+        <div class="campo"><label for="glic">Concentração de glicose <output id="o-glic"></output></label><input id="glic" type="range" min="5" max="25" step="0.5" value="10"></div>
       </div>
-      <div class="resultado">
-        <div class="tig" aria-live="polite"><div class="valor" id="v-tig">6,9</div><div class="unid">mg/kg/min de glicose</div></div>
-        <div class="passos">
-          <h3>A conta, passo a passo</h3>
-          <ol id="passos"></ol>
+      <div class="lado-dir">
+        <div class="visor" aria-live="polite">
+          <div class="rot"><span>Taxa de infusão de glicose</span><i>ao vivo</i></div>
+          <div class="valor" id="v-tig">6,9</div>
+          <div class="unid">mg/kg/min</div>
+          <canvas id="traco" aria-hidden="true"></canvas>
         </div>
+        <div class="conta"><h3>A conta, passo a passo</h3><ol id="passos"></ol></div>
       </div>
     </div>
     <p class="aviso">Demonstração educacional. Não substitui a prescrição nem a conferência pelo médico responsável.</p>
   </div>
 </section>
 
-<section id="contrario">
+<section class="contrario" id="contrario">
   <div class="wrap">
-    <h2>Teoria do Contrário: a IA contesta o médico</h2>
-    <p class="lead">Cada trio defende uma posição e pede à IA que argumente, com evidência, o lado oposto. Toque em uma controvérsia para ver os dois lados.</p>
-    <div class="controv" id="controv"></div>
-    <div class="veredictos">Veredictos possíveis: <span>mantém a posição</span><span>muda</span><span>depende do contexto</span><span>falta evidência</span></div>
-    <p class="miudo">Nenhuma controvérsia do curso trata de alimentação ou nutrição enteral.</p>
+    <div class="cap"><b>IV</b>Teoria do Contrário<span></span></div>
+    <h2>A IA usada para <em>contestar o médico</em></h2>
+    <p class="lead">Cada trio defende uma posição e pede à IA que argumente, com evidência, o lado oposto. Toque numa controvérsia para ver os dois lados.</p>
+    <div class="cvs" id="cvs"></div>
+    <div class="veredictos">Veredictos possíveis <span>mantém a posição</span><span>muda</span><span>depende do contexto</span><span>falta evidência</span></div>
+    <p class="fecho">Nenhuma controvérsia do curso trata de alimentação ou nutrição enteral.</p>
   </div>
 </section>
 
-<section class="serie-sec" id="serie">
+<section class="serie" id="serie">
   <div class="wrap">
-    <h2>Série nacional: uma aula, sessenta minutos</h2>
-    <p class="lead">Grupos de neonatologistas reunidos em várias cidades, por volta das 19h, assistindo numa tela grande. O instrutor demonstra durante 45 minutos e responde às perguntas das cidades nos 15 seguintes. A organização dos encontros fica com a Nestlé, e todas as aulas são gravadas e editadas em capítulos.</p>
-
-    <div class="barra" role="img" aria-label="Linha do tempo de uma aula de 60 minutos">
-      <div style="flex:5;background:#7B8CDE">Gancho</div>
-      <div style="flex:12;background:var(--foto)">Ato 1</div>
-      <div style="flex:12;background:#3A59D1">Ato 2</div>
-      <div style="flex:11;background:#2C46B0">Ato 3</div>
-      <div style="flex:2;background:var(--monitor)" title="Colheita"></div>
-      <div style="flex:1;background:var(--ambar)" title="Minuto ético"></div>
-      <div style="flex:2;background:#8FA4BD" title="O que fazer amanhã"></div>
-      <div style="flex:15;background:var(--noite)">Perguntas</div>
+    <div class="cap"><b>V</b>Série nacional<span></span></div>
+    <h2>Uma aula, <em>sessenta minutos</em></h2>
+    <p class="lead">Grupos de neonatologistas reunidos em várias cidades, por volta das 19h, diante de uma tela grande. O instrutor demonstra durante 45 minutos e responde às perguntas das cidades nos 15 seguintes. A Nestlé organiza os encontros, e todas as aulas são gravadas e editadas em capítulos.</p>
+    <div class="tempo">
+      <div class="barra" role="img" aria-label="Linha do tempo de uma aula de 60 minutos">
+        <div style="flex:5;background:#8A9BE8">Gancho</div>
+        <div style="flex:12;background:var(--foto)">Ato 1</div>
+        <div style="flex:12;background:#4466E0">Ato 2</div>
+        <div style="flex:11;background:#3350C2">Ato 3</div>
+        <div style="flex:2;background:var(--monitor)"></div>
+        <div style="flex:1;background:var(--ambar)"></div>
+        <div style="flex:2;background:#8EA3BD"></div>
+        <div style="flex:15;background:var(--noite)">Perguntas</div>
+      </div>
+      <div class="marcas"><span>0</span><span>15</span><span>30</span><span>45</span><span>60 min</span></div>
+      <div class="chaves">
+        <span><i style="background:#8A9BE8"></i>Gancho: a IA defende o lado contrário</span>
+        <span><i style="background:var(--monitor)"></i>Colheita do gancho</span>
+        <span><i style="background:var(--ambar)"></i>Minuto ético</span>
+        <span><i style="background:#8EA3BD"></i>QR code com os prompts</span>
+      </div>
     </div>
-    <div class="legenda-barra"><span>0</span><span>15</span><span>30</span><span>45</span><span>60 min</span></div>
-    <div class="chaves">
-      <span><i style="background:#7B8CDE"></i>Gancho: a IA defende o lado contrário</span>
-      <span><i style="background:var(--monitor)"></i>Colheita do gancho</span>
-      <span><i style="background:var(--ambar)"></i>Minuto ético</span>
-      <span><i style="background:#8FA4BD"></i>QR code com os prompts da aula</span>
-    </div>
-
     <div class="aulas" id="aulas"></div>
-    <p class="miudo">Na última aula, as cinco perguntas éticas aparecem juntas na tela. Em todas elas, a responsabilidade final é do médico.</p>
+    <p class="fecho">Na última aula, as cinco perguntas éticas aparecem juntas na tela. Em todas elas, a responsabilidade final é do médico.</p>
   </div>
 </section>
 
-<section id="situa">
+<section class="situa">
   <div class="wrap">
-    <h2>O passo seguinte a um curso introdutório</h2>
+    <div class="cap"><b>VI</b>Onde se situa<span></span></div>
+    <h2>O passo seguinte a <em>um curso introdutório</em></h2>
     <p class="lead">Cursos introdutórios ensinam a escrever bons pedidos à IA. O AIMED Neonatal parte desse ponto e vai até a ferramenta construída pelo próprio neonatologista.</p>
-    <div class="situa">
-      <div class="c1 t">Nível introdutório</div><div class="c2 t">AIMED Neonatal</div>
-      <div class="c1">Conteúdo geral, sem foco numa especialidade</div><div class="c2">UTI neonatal: cálculo, procedimento e controvérsias próprias da especialidade</div>
-      <div class="c1">Prompts prontos</div><div class="c2">Skills, ferramentas e agentes funcionando ao fim de cada aula</div>
-      <div class="c1">Checklists para validar respostas</div><div class="c2">A IA usada para contestar a posição do próprio médico</div>
-      <div class="c1">Boas práticas de proteção de dados</div><div class="c2">Resolução CFM nº 2.454/2026 discutida em forma de pergunta, aula a aula</div>
-      <div class="c1">Material de apoio em PDF</div><div class="c2">Site da turma e páginas das aulas, atualizáveis quando as ferramentas mudam</div>
-      <div class="c1">Demonstração de ferramentas existentes</div><div class="c2">Exemplos tirados de ferramentas que o instrutor construiu e que estão em uso na rede pública de saúde</div>
+    <div class="comp">
+      <div class="a t">Nível introdutório</div><div class="b t">AIMED Neonatal</div>
+      <div class="a">Conteúdo geral, sem foco numa especialidade</div><div class="b">UTI neonatal: cálculo, procedimento e controvérsias da especialidade</div>
+      <div class="a">Prompts prontos</div><div class="b">Skills, ferramentas e agentes funcionando ao fim de cada aula</div>
+      <div class="a">Checklists para validar respostas</div><div class="b">A IA usada para contestar a posição do próprio médico</div>
+      <div class="a">Boas práticas de proteção de dados</div><div class="b">Resolução CFM nº 2.454/2026 discutida em forma de pergunta, aula a aula</div>
+      <div class="a">Material de apoio em PDF</div><div class="b">Site da turma e páginas das aulas, atualizáveis quando as ferramentas mudam</div>
+      <div class="a">Demonstração de ferramentas existentes</div><div class="b">Exemplos tirados de ferramentas que o instrutor construiu e que estão em uso na rede pública de saúde</div>
     </div>
   </div>
 </section>
 
-<section class="invest-sec" id="investimento">
+<section class="invest" id="investimento">
   <div class="wrap">
-    <h2>Investimento</h2>
-    <p class="lead">O valor da imersão é fechado por turma de até 15 participantes, e a Nestlé escolhe quem cuida da logística.</p>
+    <div class="cap"><b>VII</b>Investimento<span></span></div>
+    <h2>Duas formas de <em>organizar a imersão</em></h2>
+    <p class="lead">O valor é fechado por turma de até 15 participantes, e a Nestlé escolhe quem cuida da logística.</p>
     <div class="opcoes">
-      <div class="op"><h3>Opção A</h3><p class="q">A INOVAMED organiza local, infraestrutura, cafés e pessoa de apoio. Somente para imersão em Joinville.</p><div class="preco">R$ 37.500</div><div class="por">por turma</div></div>
-      <div class="op b"><h3>Opção B</h3><p class="q">A Nestlé organiza o evento. Vale para qualquer cidade.</p><div class="preco">R$ 30.000</div><div class="por">por turma</div></div>
+      <div class="op"><h3>Opção A · Organização INOVAMED</h3><div class="preco">R$ 37.500</div><div class="por">por turma</div><p>Local, infraestrutura, cafés e pessoa de apoio por conta da INOVAMED. Somente para imersão em Joinville.</p></div>
+      <div class="op b"><h3>Opção B · Organização Nestlé</h3><div class="preco">R$ 30.000</div><div class="por">por turma</div><p>A Nestlé organiza o evento, em qualquer cidade.</p></div>
     </div>
     <ul class="inclui">
       <li>Sessão online de preparação</li>
       <li>Imersão presencial de um dia e meio</li>
       <li>Site exclusivo da turma</li>
       <li>Demo Day online, 60 dias depois</li>
-      <li>Crachás e certificados (13 horas)</li>
+      <li>Crachás e certificados de 13 horas</li>
     </ul>
-    <p class="miudo">Fora de Joinville, deslocamento e hospedagem do instrutor ficam a cargo da Nestlé. A série nacional de cinco aulas tem valor sob consulta, a definir com o calendário e o número de cidades. Condições de pagamento a combinar. Proposta válida até 20 de novembro de 2026.</p>
+    <p class="miudo">Fora de Joinville, deslocamento e hospedagem do instrutor ficam a cargo da Nestlé. A série nacional de cinco aulas tem valor sob consulta, definido com o calendário e o número de cidades. Condições de pagamento a combinar.</p>
     <p class="miudo">O conteúdo trata exclusivamente de IA aplicada à prática médica. Nenhuma aula ou material menciona produtos ou marcas da Nestlé, nem trata de alimentação infantil, e o enquadramento institucional dos eventos na NBCAL (Lei nº 11.265/2006) fica a critério da Nestlé. A metodologia, os prompts, as Skills e as ferramentas do curso são propriedade intelectual da INOVAMED. Nenhum dado identificável de paciente é usado em aula.</p>
   </div>
 </section>
 
-<section id="instrutor">
+<section class="instrutor" id="instrutor">
   <div class="wrap">
-    <h2>Quem conduz</h2>
+    <div class="cap"><b>VIII</b>Quem conduz<span></span></div>
     <div class="bio">
+      <figure class="retrato"><img src="foto-mbula.jpg" alt="Dr. Mbula Luzingu Barros" width="900" height="1125" loading="lazy"><figcaption><b>Dr. Mbula Luzingu Barros</b><span>Médico intensivista pediátrico</span></figcaption></figure>
       <div>
         <p class="frase">Dr. Mbula Luzingu Barros constrói as tecnologias de que fala.</p>
-        <div class="fato">40 min → 4 s<small>tempo de análise de cada termo de estágio, depois do robô que ele desenvolveu para a rede pública de saúde</small></div>
-      </div>
+        <div class="fato"><span class="v">40 min <s>/</s> 4 s</span><small>tempo de análise de cada termo de estágio antes e depois do robô que ele desenvolveu para a rede pública de saúde</small></div>
       <div class="bio-texto">
         <p>Médico intensivista pediátrico, com mais de 25 anos de atuação em terapia intensiva. Desenvolveu sistemas e robôs de inteligência artificial hoje em uso na rede pública de saúde de Santa Catarina: gestão de leitos neonatais, vigilância epidemiológica, cirurgia segura, fluxos de recursos humanos. O sistema de gestão de leitos neonatais foi apresentado no Hackathon de Harvard (hub Brasília).</p>
         <p>Em 2023, criou e publicou na Play Store um aplicativo médico voltado ao autismo, que em 2024 evoluiu para o portal inovamed.pro. Criador da metodologia AIMED, ministra cursos de IA para médicos e equipes multiprofissionais desde agosto de 2024, com turmas em Joinville, Goiânia e Recife.</p>
@@ -376,47 +477,76 @@ input[type=range]{width:100%;accent-color:var(--monitor)}
 
 <section class="fim" id="proximos">
   <div class="wrap">
-    <h2>Próximos passos</h2>
-    <ol class="passos-fim">
-      <li>Escolha entre as opções A e B</li>
-      <li>Data e cidade da imersão</li>
-      <li>Calendário e cidades da série nacional</li>
-      <li>Valor da série, a partir do calendário</li>
-      <li>Contrato, com uso das gravações e propriedade intelectual</li>
-      <li>Sessão de preparação, de 7 a 3 dias antes da imersão</li>
+    <div class="cap"><b>IX</b>Próximos passos<span></span></div>
+    <h2>Do aceite à <em>primeira turma</em></h2>
+    <ol class="passos">
+      <li><b>1</b>Escolha entre as opções A e B</li>
+      <li><b>2</b>Data e cidade da imersão</li>
+      <li><b>3</b>Calendário e cidades da série nacional</li>
+      <li><b>4</b>Valor da série, a partir do calendário</li>
+      <li><b>5</b>Contrato, com uso das gravações e propriedade intelectual</li>
+      <li><b>6</b>Sessão de preparação, de 7 a 3 dias antes da imersão</li>
     </ol>
-    <div class="assin"><span>INOVAMED, <a href="https://inovamed.pro">inovamed.pro</a></span><span>Proposta comercial confidencial, outubro de 2026</span></div>
+    <div class="assinatura">
+      <div class="grande">AIMED <em>Neonatal</em></div>
+      <div class="dir">INOVAMED · <a href="https://inovamed.pro">inovamed.pro</a><br>Proposta comercial confidencial<br>Válida até 20 de novembro de 2026</div>
+    </div>
   </div>
 </section>
 
-</main>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-/* ---------- abas ---------- */
-const tabs=[...document.querySelectorAll('[role=tab]')];
-function abrir(t){tabs.forEach(x=>{const on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).classList.toggle('ativo',on)})}
-tabs.forEach((t,i)=>{t.addEventListener('click',()=>abrir(t));t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const n=tabs[(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length];abrir(n);n.focus()}})});
-
-/* ---------- calculadora TIG ---------- */
-const fmt=(n,d=1)=>n.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
 const $=id=>document.getElementById(id);
+const reduz=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* barra superior e progresso */
+const topo=$('topo'),prog=$('progresso'),links=[...document.querySelectorAll('.topo nav a')];
+function rolar(){
+  const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;
+  topo.classList.toggle('solido',y>innerHeight*0.6);
+  prog.style.width=(h>0?y/h*100:0)+'%';
+  let atual=null;links.forEach(a=>{const s=document.querySelector(a.getAttribute('href'));if(s&&s.getBoundingClientRect().top<innerHeight*0.4)atual=a});
+  links.forEach(a=>a.classList.toggle('atual',a===atual));
+}
+addEventListener('scroll',rolar,{passive:true});rolar();
+
+/* calculadora */
+const fmt=(n,d=1)=>n.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
+let tigAtual=6.9;
+function pintaFaixa(el){const p=(el.value-el.min)/(el.max-el.min)*100;el.style.setProperty('--p',p+'%')}
 function calc(){
-  const p=+$('peso').value, v=+$('vol').value, g=+$('glic').value;
-  $('o-peso').textContent=fmt(p,2)+' kg';$('o-vol').textContent=v+' mL/kg/dia';$('o-glic').textContent=fmt(g,g%1?1:0)+'%';
-  const volDia=v*p;                 // mL/dia
-  const gDia=volDia*g/100;           // g/dia
-  const mgKgMin=gDia*1000/p/1440;    // mg/kg/min
-  $('v-tig').textContent=fmt(mgKgMin);
+  const p=+$('peso').value,v=+$('vol').value,g=+$('glic').value,gd=g%1?1:0;
+  ['peso','vol','glic'].forEach(id=>pintaFaixa($(id)));
+  $('o-peso').textContent=fmt(p,2)+' kg';$('o-vol').textContent=v+' mL/kg/dia';$('o-glic').textContent=fmt(g,gd)+'%';
+  const volDia=v*p,gDia=volDia*g/100,tig=gDia*1000/p/1440;
+  tigAtual=tig;$('v-tig').textContent=fmt(tig);
   $('passos').innerHTML=
    `<li>Volume diário: ${v} mL/kg/dia × ${fmt(p,2)} kg = <b>${fmt(volDia)} mL/dia</b></li>`+
-   `<li>Glicose ofertada: ${fmt(volDia)} mL × ${fmt(g,g%1?1:0)} g/100 mL = <b>${fmt(gDia,2)} g/dia</b></li>`+
-   `<li>Em miligramas por quilo por minuto: ${fmt(gDia,2)} g × 1.000 ÷ ${fmt(p,2)} kg ÷ 1.440 min = <b>${fmt(mgKgMin)} mg/kg/min</b></li>`+
-   `<li class="f">Atalho conferido: (${fmt(g,g%1?1:0)} × ${v}) ÷ 144 = ${fmt(g*v/144)} mg/kg/min</li>`;
+   `<li>Glicose ofertada: ${fmt(volDia)} mL × ${fmt(g,gd)} g/100 mL = <b>${fmt(gDia,2)} g/dia</b></li>`+
+   `<li>Por quilo e por minuto: ${fmt(gDia,2)} g × 1.000 ÷ ${fmt(p,2)} kg ÷ 1.440 min = <b>${fmt(tig)} mg/kg/min</b></li>`+
+   `<li class="atalho">Atalho conferido: (${fmt(g,gd)} × ${v}) ÷ 144 = ${fmt(g*v/144)} mg/kg/min</li>`;
 }
 ['peso','vol','glic'].forEach(id=>$(id).addEventListener('input',calc));calc();
 
-/* ---------- controvérsias ---------- */
+/* traçado de monitor no visor */
+(function(){
+  const c=$('traco'),x=c.getContext('2d');let w,h,t=0;
+  function tam(){const r=devicePixelRatio||1;w=c.clientWidth;h=c.clientHeight;c.width=w*r;c.height=h*r;x.setTransform(r,0,0,r,0,0)}
+  addEventListener('resize',tam);tam();
+  function onda(u){const f=u%1;let y=Math.sin(f*Math.PI*2)*.08;if(f>.42&&f<.46)y-=.25;if(f>.46&&f<.5)y+=1;if(f>.5&&f<.54)y-=.45;if(f>.7&&f<.82)y+=Math.sin((f-.7)/.12*Math.PI)*.22;return y}
+  function quadro(){
+    x.clearRect(0,0,w,h);
+    const amp=h*.38*Math.min(1.3,.55+tigAtual/14),per=Math.max(.6,1.6-tigAtual/12);
+    x.lineWidth=1.6;x.strokeStyle='rgba(46,196,182,.9)';x.shadowColor='rgba(46,196,182,.6)';x.shadowBlur=8;x.beginPath();
+    for(let i=0;i<=w;i+=2){const u=(i/w)*3/per+t;const y=h*.62-onda(u)*amp;i?x.lineTo(i,y):x.moveTo(i,y)}
+    x.stroke();
+    if(!reduz)t+=0.012;
+    requestAnimationFrame(quadro);
+  }
+  quadro();
+})();
+
+/* controvérsias */
 const cvs=[
  ['Transfusão no prematuro','Limiar restritivo de hemoglobina','Limiar liberal','TOP · Kirpalani · NEJM · 2020; ETTNO · Franz · JAMA · 2020'],
  ['Persistência do canal arterial','Tratar o canal','Conduta expectante','BeNeDuctus · Hundscheid · NEJM · 2023'],
@@ -424,10 +554,10 @@ const cvs=[
  ['Sepse precoce','Antibiótico por fator de risco','Calculadora de risco','Calculadora de sepse precoce da Kaiser Permanente'],
  ['Cânula traqueal','Regra "peso + 6"','Tabela por idade gestacional','Nasce do próprio laboratório de cálculos']
 ];
-$('controv').innerHTML=cvs.map((c,i)=>`<div class="cv" id="cv${i}"><h3>${c[0]}</h3><div class="ev">${c[3]}</div><button aria-expanded="false" aria-controls="l${i}">Pedir o contrário</button><div class="lados" id="l${i}"><div class="lado eu"><b>O médico defende</b>${c[1]}</div><div class="lado ia"><b>A IA argumenta, com evidência</b>${c[2]}</div></div></div>`).join('');
-document.querySelectorAll('.cv button').forEach(b=>b.addEventListener('click',()=>{const cv=b.closest('.cv');const on=!cv.classList.contains('aberto');cv.classList.toggle('aberto',on);b.setAttribute('aria-expanded',on);b.textContent=on?'Fechar':'Pedir o contrário'}));
+$('cvs').innerHTML=cvs.map((c,i)=>`<div class="cv"><button aria-expanded="false" aria-controls="lado${i}"><span class="i">${i+1}</span><span><h3>${c[0]}</h3><span class="ev">${c[3]}</span></span><span class="acao">Pedir o contrário</span></button><div class="lados" id="lado${i}"><div class="lado"><small>O médico defende</small>${c[1]}</div><div class="lado ia"><small>A IA argumenta, com evidência</small>${c[2]}</div></div></div>`).join('');
+document.querySelectorAll('.cv button').forEach(b=>b.addEventListener('click',()=>{const cv=b.parentElement,on=!cv.hasAttribute('data-aberto');cv.toggleAttribute('data-aberto',on);b.setAttribute('aria-expanded',on);b.querySelector('.acao').textContent=on?'Fechar':'Pedir o contrário'}));
 
-/* ---------- aulas ---------- */
+/* aulas */
 const aulas=[
  ['Do prompt ao método: AIMED na UTIN','Transfusão no prematuro: restritivo ou liberal',['Pedido comum e pedido AIMED, lado a lado','Perfil Clínico Permanente','Evolução ditada por voz e transformada em texto de prontuário'],'Você ditou e a IA escreveu a evolução. Quem assina, e o que precisa constar no prontuário?'],
  ['Cálculos neonatais e o erro de 10×','Cânula: "peso + 6" ou tabela por idade gestacional',['TIG como Skill','Drogas vasoativas com alerta de dose máxima','Calculadora de fototerapia (AAP 2022)'],'A calculadora errou a vírgula e você não conferiu. De quem é o erro?'],
@@ -435,63 +565,55 @@ const aulas=[
  ['Gemini Notebook: a biblioteca da sua UTIN','Hidrocortisona profilática para displasia broncopulmonar',['Dúvida de plantão transformada em PICO, busca e fontes reais','Os ensaios carregados no Notebook, com conferência do trecho citado','A IA defende o lado contrário, e o veredicto sai das fontes'],'A IA citou um estudo que você não abriu. Dá para mudar uma conduta com base nele?'],
  ['Do 3D ao agente','Persistência do canal arterial: tratar ou esperar',['Cateter umbilical em 3D com a profundidade calculada','Agente que avisa a janela de rastreio de cada prematuro','Ética e comunicação com os pais'],'A mãe pergunta: foi o computador que decidiu? O que você responde?']
 ];
-$('aulas').innerHTML=aulas.map((a,i)=>`<details class="aula"${i===0?' open':''}><summary><span class="n">${i+1}</span><span><h3>${a[0]}</h3><div class="g">Gancho: ${a[1]}</div></span><span class="mais" aria-hidden="true">+</span></summary><div class="atos">${a[2].map((t,j)=>`<div class="ato"><b>Ato ${j+1}</b>${t}</div>`).join('')}</div><div class="etica"><b>Minuto ético:</b> “${a[3]}”</div></details>`).join('');
+$('aulas').innerHTML=aulas.map((a,i)=>`<details class="aula"${i===0?' open':''}><summary><span class="n">${i+1}</span><span><h3>${a[0]}</h3><div class="g">Gancho: ${a[1]}</div></span><span class="mais" aria-hidden="true"></span></summary><div class="atos">${a[2].map((t,j)=>`<div class="ato"><b>Ato ${j+1}</b>${t}</div>`).join('')}</div><div class="etica"><small>Minuto ético</small>“${a[3]}”</div></details>`).join('');
 
-/* ---------- cena 3D: curvas de crescimento ---------- */
+/* cena 3D: curvas de crescimento */
 (function(){
-  const canvas=$('cena');
-  if(!window.THREE){return}
-  let renderer;
-  try{renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true})}catch(e){return}
-  const reduz=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const cena=new THREE.Scene();
-  const cam=new THREE.PerspectiveCamera(38,1,0.1,100);
-  cam.position.set(0,0.4,9.5);
-  const grupo=new THREE.Group();cena.add(grupo);
-  // curvas estilizadas (decorativas): crescimento rápido inicial e desaceleração
-  const pct=[-3,-2,-1,0,1,2,3];
-  const cores=[0x4C6EF5,0x4C6EF5,0x2EC4B6,0x2EC4B6,0x2EC4B6,0x4C6EF5,0x4C6EF5];
-  const viajantes=[];
+  const canvas=$('cena');if(!window.THREE)return;
+  let r;try{r=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true})}catch(e){return}
+  const cena=new THREE.Scene();cena.fog=new THREE.Fog(0x0E1830,10,24);
+  const cam=new THREE.PerspectiveCamera(36,1,.1,100);cam.position.set(0,.6,14);
+  const g=new THREE.Group();cena.add(g);
+  const pct=[-3,-2,-1,0,1,2,3],tubos=[],viaj=[];
   pct.forEach((z,k)=>{
-    const pts=[];
-    for(let i=0;i<=40;i++){
-      const t=i/40, x=-4.2+t*8.4;
-      const y=-1.9+ (1-Math.exp(-2.6*t))*3.1*(1+z*0.075) + z*0.32;
-      pts.push(new THREE.Vector3(x,y,(z)*0.55));
-    }
+    const pts=[];for(let i=0;i<=48;i++){const t=i/48,x=-4.4+t*8.8;const y=-2.1+(1-Math.exp(-2.5*t))*3.2*(1+z*.07)+z*.34;pts.push(new THREE.Vector3(x,y,z*1.0))}
     const curva=new THREE.CatmullRomCurve3(pts);
-    const larg = z===0?0.045:0.022;
-    const mat=new THREE.MeshBasicMaterial({color:cores[k],transparent:true,opacity:z===0?0.95:0.55-Math.abs(z)*0.08});
-    grupo.add(new THREE.Mesh(new THREE.TubeGeometry(curva,160,larg,8,false),mat));
-    const ponto=new THREE.Mesh(new THREE.SphereGeometry(z===0?0.11:0.07,16,16),new THREE.MeshBasicMaterial({color:z===0?0xF2A541:0xE9F1F6}));
-    grupo.add(ponto);viajantes.push({curva,ponto,fase:k*0.13});
+    const cor=z===0?0x2EC4B6:(Math.abs(z)===1?0x3FA7C9:0x5B7CFA);
+    const geo=new THREE.TubeGeometry(curva,220,z===0?.05:.022,10,false);
+    const mat=new THREE.MeshBasicMaterial({color:cor,transparent:true,opacity:z===0?1:.62-Math.abs(z)*.1,blending:THREE.AdditiveBlending,depthWrite:false});
+    const m=new THREE.Mesh(geo,mat);m.geometry.setDrawRange(0,0);g.add(m);tubos.push(m);
+    // halo
+    const halo=new THREE.Mesh(new THREE.TubeGeometry(curva,120,z===0?.16:.07,8,false),new THREE.MeshBasicMaterial({color:cor,transparent:true,opacity:z===0?.12:.05,blending:THREE.AdditiveBlending,depthWrite:false}));
+    halo.geometry.setDrawRange(0,0);g.add(halo);tubos.push(halo);
+    const sp=new THREE.Mesh(new THREE.SphereGeometry(z===0?.1:.06,20,20),new THREE.MeshBasicMaterial({color:z===0?0xF2A541:0xEAF2F8}));
+    sp.visible=false;g.add(sp);viaj.push({curva,sp,fase:k*.137});
   });
-  // grade de fundo
-  const gm=new THREE.LineBasicMaterial({color:0x33486E,transparent:true,opacity:.45});
-  for(let i=0;i<=12;i++){const x=-4.2+i*0.7;const g=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(x,-2.2,-2),new THREE.Vector3(x,2.2,-2)]);grupo.add(new THREE.Line(g,gm))}
-  for(let j=0;j<=6;j++){const y=-2.2+j*0.733;const g=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-4.2,y,-2),new THREE.Vector3(4.2,y,-2)]);grupo.add(new THREE.Line(g,gm))}
-  // poeira luminosa
-  const n=380,pos=new Float32Array(n*3);for(let i=0;i<n;i++){pos[i*3]=(Math.random()-.5)*16;pos[i*3+1]=(Math.random()-.5)*9;pos[i*3+2]=(Math.random()-.5)*8}
+  const lm=new THREE.LineBasicMaterial({color:0x2A3B61,transparent:true,opacity:.55});
+  for(let i=0;i<=12;i++){const x=-4.4+i*.733;g.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(x,-2.4,-3.2),new THREE.Vector3(x,2.4,-3.2)]),lm))}
+  for(let j=0;j<=6;j++){const y=-2.4+j*.8;g.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-4.4,y,-3.2),new THREE.Vector3(4.4,y,-3.2)]),lm))}
+  // caixa de vidro e piso: pistas de profundidade
+  const caixa=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(8.8,4.8,6.4)),new THREE.LineBasicMaterial({color:0x5B7CFA,transparent:true,opacity:.5}));g.add(caixa);
+  const piso=new THREE.GridHelper(8.8,12,0x2EC4B6,0x2A3B61);piso.scale.z=6.4/8.8;piso.position.y=-2.4;piso.material.transparent=true;piso.material.opacity=.55;g.add(piso);
+  const n=520,pos=new Float32Array(n*3);for(let i=0;i<n;i++){pos[i*3]=(Math.random()-.5)*18;pos[i*3+1]=(Math.random()-.5)*10;pos[i*3+2]=(Math.random()-.5)*9}
   const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
-  cena.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x7FA8D8,size:.03,transparent:true,opacity:.6})));
-
-  function tam(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();
-    const largo=w>900; grupo.position.x=largo?3.3:0; grupo.position.y=largo?0:-1.2; grupo.scale.setScalar(largo?0.85:0.7)}
+  const poeira=new THREE.Points(pg,new THREE.PointsMaterial({color:0x8FB4E0,size:.028,transparent:true,opacity:.55,depthWrite:false}));cena.add(poeira);
+  function tam(){const w=canvas.clientWidth,h=canvas.clientHeight;r.setPixelRatio(Math.min(devicePixelRatio,2));r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();
+    const largo=w>900;g.position.set(largo?3.1:0,largo?.25:2.4,0);g.scale.setScalar(largo?1:.72)}
   addEventListener('resize',tam);tam();
-  let rotY=-0.55,rotX=0.12,alvoY=rotY,alvoX=rotX,arr=null;
-  canvas.style.pointerEvents='auto';canvas.style.cursor='grab';
-  canvas.addEventListener('pointerdown',e=>{arr={x:e.clientX,y:e.clientY,ry:alvoY,rx:alvoX};canvas.style.cursor='grabbing'});
-  addEventListener('pointerup',()=>{arr=null;canvas.style.cursor='grab'});
-  addEventListener('pointermove',e=>{if(!arr)return;alvoY=arr.ry+(e.clientX-arr.x)*0.006;alvoX=Math.max(-.6,Math.min(.6,arr.rx+(e.clientY-arr.y)*0.004))});
-  let t0=performance.now();
+  let ry=-1.6,rx=.5,ay=-.9,ax=.3,mx=0,my=0,arr=null;
+  addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;if(arr){ay=arr.y+(e.clientX-arr.cx)*.006;ax=Math.max(-.5,Math.min(.5,arr.x+(e.clientY-arr.cy)*.004))}});
+  canvas.addEventListener('pointerdown',e=>{if(e.pointerType==='touch')return;arr={x:ax,y:ay,cx:e.clientX,cy:e.clientY}});
+  addEventListener('pointerup',()=>arr=null);
+  const t0=performance.now(),dur=reduz?1:2600;
   function quadro(t){
-    const s=Math.max(0,(t-t0)/1000);
-    if(!reduz&&!arr) alvoY+=0.0012;
-    rotY+=(alvoY-rotY)*0.08; rotX+=(alvoX-rotX)*0.08;
-    grupo.rotation.set(rotX,rotY,0);
-    viajantes.forEach(v=>{const u=reduz?0.75:(((s*0.07+v.fase)%1)+1)%1;v.ponto.position.copy(v.curva.getPointAt(u))});
-    renderer.render(cena,cam);
-    requestAnimationFrame(quadro);
+    const s=Math.max(0,(t-t0)/1000),k=Math.min(1,Math.max(0,(t-t0-300)/dur)),e=1-Math.pow(1-k,3);
+    tubos.forEach(m=>{const tot=m.geometry.index.count;m.geometry.setDrawRange(0,Math.floor(tot*e/6)*6)});
+    if(!reduz&&!arr)ay+=.0016;
+    const osc=reduz?0:Math.sin(s*.35)*.08;
+    const lerp=k<1?.025:.05;ry+=(ay+mx*.35-ry)*lerp;rx+=(ax+my*.18-rx)*lerp;g.rotation.set(rx+osc*.5,ry+osc,0);
+    poeira.rotation.y=s*.01;
+    viaj.forEach(v=>{v.sp.visible=k>=1;const u=reduz?.78:(((s*.06+v.fase)%1)+1)%1;v.sp.position.copy(v.curva.getPointAt(u))});
+    r.render(cena,cam);requestAnimationFrame(quadro);
   }
   requestAnimationFrame(quadro);
 })();
