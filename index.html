@@ -264,6 +264,11 @@ details.aula[open] .mais{transform:rotate(45deg);background:#12284D}
 .assinatura .dir a{color:#fff}
 @media (max-width:860px){.passos{grid-template-columns:1fr}}
 
+.subir{position:fixed;right:22px;bottom:22px;z-index:60;width:52px;height:52px;border-radius:14px;border:1px solid rgba(207,174,92,.55);background:rgba(8,20,41,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--monitor);display:grid;place-items:center;cursor:pointer;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .3s,transform .3s,background .2s}
+.subir.mostra{opacity:1;transform:none;pointer-events:auto}
+.subir:hover{background:var(--monitor);color:#081429}
+.subir svg{width:22px;height:22px}
+@media print{.subir{display:none}}
 /* impressão */
 @media print{
   .topo,#cena,.hero::after{display:none!important}
@@ -518,6 +523,8 @@ details.aula[open] .mais{transform:rotate(45deg);background:#12284D}
   </div>
 </section>
 
+<button class="subir" id="subir" type="button" aria-label="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></button>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 const $=id=>document.getElementById(id);
@@ -529,10 +536,12 @@ function rolar(){
   const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;
   topo.classList.toggle('solido',y>innerHeight*0.6);
   prog.style.width=(h>0?y/h*100:0)+'%';
+  $('subir').classList.toggle('mostra',y>innerHeight*0.9);
   let atual=null;links.forEach(a=>{const s=document.querySelector(a.getAttribute('href'));if(s&&s.getBoundingClientRect().top<innerHeight*0.4)atual=a});
   links.forEach(a=>a.classList.toggle('atual',a===atual));
 }
 addEventListener('scroll',rolar,{passive:true});rolar();
+$('subir').addEventListener('click',()=>scrollTo({top:0,behavior:reduz?'auto':'smooth'}));
 
 /* calculadora */
 const fmt=(n,d=1)=>n.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
