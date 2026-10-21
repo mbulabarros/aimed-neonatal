@@ -63,7 +63,19 @@ section{padding:clamp(88px,11vw,150px) 0;position:relative}
 .topo nav a{text-decoration:none;opacity:.72;transition:opacity .2s}
 .topo nav a:hover,.topo nav a.atual{opacity:1}
 .progresso{position:absolute;left:0;bottom:0;height:2px;width:0;background:linear-gradient(90deg,var(--monitor),var(--foto))}
-@media (max-width:900px){.topo nav{display:none}}
+.topo nav .so-movel{display:none}
+.topo nav.aberto .so-movel{display:flex}
+.menu-btn{display:none;align-items:center;gap:10px;background:transparent;border:1px solid rgba(207,174,92,.5);color:#E8EFF6;font:600 14px var(--sans);padding:9px 14px;border-radius:10px;cursor:pointer}
+.menu-btn svg{width:18px;height:18px;color:var(--monitor)}
+@media (max-width:900px){
+  .menu-btn{display:inline-flex}
+  .topo nav{display:none}
+  .topo.menu-aberto{background:rgba(8,20,41,.98);backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .topo nav.aberto{display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;bottom:0;background:#081429;padding:12px 20px 40px;overflow-y:auto;gap:0}
+  .topo nav.aberto a{opacity:1;font-size:20px;font-family:var(--serif);padding:16px 2px;border-bottom:1px solid var(--linha-escura);display:flex;justify-content:space-between}
+  .topo nav.aberto a::after{content:"→";color:var(--monitor);font-family:var(--sans)}
+  .topo nav.aberto a.atual{color:var(--monitor)}
+}
 
 /* hero */
 .hero{min-height:100svh;background:radial-gradient(90% 80% at 70% 35%,#1B2B52 0%,var(--noite) 62%);color:#EEF3F8;display:flex;align-items:flex-end;overflow:hidden;padding:0}
@@ -104,7 +116,8 @@ section{padding:clamp(88px,11vw,150px) 0;position:relative}
 /* grade */
 .grade{background:var(--acrilico)}
 .cabeca{display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap}
-.numeros{display:flex;gap:44px}
+.numeros{display:flex;gap:44px;flex-wrap:wrap}
+@media (max-width:600px){.numeros{gap:24px}.numeros b{font-size:44px!important}}
 .numeros div{font-size:14px;color:var(--tinta-2)}
 .numeros b{display:block;font-family:var(--serif);font-weight:400;font-size:64px;line-height:.95;color:var(--tinta);letter-spacing:-.02em}
 .dias{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:72px}
@@ -145,7 +158,8 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 .reset{margin-top:30px;width:100%;background:transparent;border:1px solid var(--linha-escura);color:#C3D1E0;font:500 14.5px var(--sans);padding:12px 16px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:border-color .2s,color .2s}
 .reset:hover{border-color:var(--monitor);color:#fff}
 .reset svg{width:16px;height:16px}
-.cena3d{display:block;width:100%;border-radius:20px}
+.cena3d{display:block;width:100%;border-radius:20px;touch-action:pan-y}
+@media (max-width:600px){#skyline{height:300px}#aula3d{height:240px}.subir{bottom:20px!important;right:16px!important;width:44px;height:44px}}
 #skyline{height:clamp(240px,30vw,360px);margin-top:56px;background:radial-gradient(80% 90% at 50% 40%,#15305A,#0B1A33);border:1px solid var(--linha)}
 #aula3d{height:clamp(200px,24vw,300px);background:radial-gradient(80% 90% at 50% 40%,#15305A,#0B1A33);border:1px solid var(--linha)}
 .tipos{display:flex;flex-wrap:wrap;gap:12px 32px;margin-top:20px;font-size:15px;color:var(--tinta-2)}
@@ -287,14 +301,17 @@ details.aula[open] .mais{transform:rotate(45deg);background:#12284D}
 <header class="topo" id="topo">
   <div class="wrap">
     <a class="marca" href="#inicio"><i aria-hidden="true"></i>INOVAMED</a>
-    <nav aria-label="Seções">
+    <nav aria-label="Índice da proposta" id="indice">
       <a href="#jornada">Programa</a>
       <a href="#imersao">Imersão</a>
       <a href="#experimente">Experimente</a>
+      <a href="#contrario" class="so-movel">Teoria do Contrário</a>
       <a href="#serie">Série nacional</a>
       <a href="#investimento">Investimento</a>
       <a href="#instrutor">Instrutor</a>
+      <a href="#proximos" class="so-movel">Próximos passos</a>
     </nav>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="indice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span>Índice</span></button>
   </div>
   <div class="progresso" id="progresso"></div>
 </header>
@@ -346,7 +363,7 @@ details.aula[open] .mais{transform:rotate(45deg);background:#12284D}
       <span><i style="background:#A57CF0"></i>Ética <b>45 min</b></span>
       <span><i style="background:#C9D3D8"></i>Cafés</span>
     </div>
-    <p class="dica3d">Cada bloco é um módulo, com largura proporcional à duração. A fileira da frente é o dia 1; a de trás, o dia 2. Arraste para girar.</p>
+    <p class="dica3d">Cada bloco é um módulo, com largura proporcional à duração. A fileira da frente é o dia 1; a de trás, o dia 2. Arraste para os lados para girar.</p>
     <div class="dias">
       <div class="dia">
         <h3>Dia 1 <span>8h00 às 17h30</span></h3>
@@ -541,6 +558,11 @@ function rolar(){
   links.forEach(a=>a.classList.toggle('atual',a===atual));
 }
 addEventListener('scroll',rolar,{passive:true});rolar();
+const mb=$('menu-btn'),nv=$('indice');
+function menu(on){nv.classList.toggle('aberto',on);topo.classList.toggle('menu-aberto',on);mb.setAttribute('aria-expanded',on);mb.querySelector('span').textContent=on?'Fechar':'Índice';document.body.style.overflow=on?'hidden':'';$('subir').style.visibility=on?'hidden':''}
+mb.addEventListener('click',()=>menu(!nv.classList.contains('aberto')));
+nv.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu(false)));
+addEventListener('keydown',e=>{if(e.key==='Escape')menu(false)});
 $('subir').addEventListener('click',()=>scrollTo({top:0,behavior:reduz?'auto':'smooth'}));
 
 /* calculadora */
@@ -615,12 +637,13 @@ function barras3D(canvas,fileiras,o){
   });
   const base=new THREE.Mesh(new THREE.PlaneGeometry(L+1,fileiras.length*(prof+.5)+.8),new THREE.MeshBasicMaterial({color:0x13294F}));base.rotation.x=-Math.PI/2;base.position.y=-.01;g.add(base);
   function tam(){const w=canvas.clientWidth,h=canvas.clientHeight;r.setPixelRatio(Math.min(devicePixelRatio,2));r.setSize(w,h,false);cam.aspect=w/h;
-    const tf=Math.tan(THREE.MathUtils.degToRad(15)),d=Math.max((L*.6)/(tf*cam.aspect),2.6/tf);cam.position.set(0,d*.6,d*.8);cam.lookAt(0,.2,0);cam.updateProjectionMatrix()}
+    const tf=Math.tan(THREE.MathUtils.degToRad(15)),d=Math.max((L*(cam.aspect<2?.7:.6))/(tf*cam.aspect),2.6/tf);cam.position.set(0,d*.6,d*.8);cam.lookAt(0,.2,0);cam.updateProjectionMatrix()}
   addEventListener('resize',tam);tam();
   let ry=o.ry||-.35,ay=ry,arr=null,cresce=0,visto=false;
   new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)visto=true}),{threshold:.3}).observe(canvas);
   canvas.style.cursor='grab';
-  canvas.addEventListener('pointerdown',e=>{if(e.pointerType==='touch')return;arr={x:e.clientX,y:ay};canvas.style.cursor='grabbing'});
+  canvas.addEventListener('pointerdown',e=>{arr={x:e.clientX,y:ay};canvas.style.cursor='grabbing'});
+  addEventListener('pointercancel',()=>arr=null);
   addEventListener('pointerup',()=>{arr=null;canvas.style.cursor='grab'});
   addEventListener('pointermove',e=>{if(arr)ay=Math.max(-1.2,Math.min(1.2,arr.y+(e.clientX-arr.x)*.006))});
   const t0=performance.now();
